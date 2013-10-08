@@ -1,4 +1,4 @@
-=== WordPress WP-Advanced-Search ===
+=== WP Excerpt Generator ===
 Contributors: Mathieu Chartier
 Donate link: http://www.mathieu-chartier.com
 Author URI: http://blog.internet-formation.fr/2013/07/wp-excerpt-generator/
