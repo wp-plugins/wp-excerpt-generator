@@ -62,7 +62,7 @@ Some examples of existing options:
 
 = Version 1.0 (09/10/2013) =
 
-- Premi&egrave;re version du g&eacuten&eacute;rateur d'extraits (first version of the excerpt generator)
+- Premi&egrave;re version du g&eacute;n&eacute;rateur d'extraits (first version of the excerpt generator)
 - Possibilit&eacute; de choisir son mode de cr&eacute;ation (ability to choose the creation method)
 - Possibilit&eacute; de supprimer tous les extraits (ability to delete all excerpts of the database for cleaning)
 - Possibilit&eacute; de ne cr&eacute;er que les extraits manquants (ability to generate only the missing excerpts)
