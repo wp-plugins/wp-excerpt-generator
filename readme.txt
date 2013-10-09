@@ -55,8 +55,8 @@ Some examples of existing options:
 
 == Screenshots ==
 
-1. "WP Excerpt Generator" dans l'admin de Wordpress (BackOffice settings screenshot).
-2. Exemple de cr&eacute;ation d'extraits (Example of creating excerpts).
+1. "WP Excerpt Generator" dans l'admin de Wordpress (backOffice settings screenshot).
+2. Exemple de cr&eacute;ation d'extraits (example of creating excerpts).
 
 == Changelog ==
 
