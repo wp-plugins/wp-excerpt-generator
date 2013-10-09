@@ -1,8 +1,41 @@
 <?php
+// Fonction de fermeture automatique des balises non fermées...
+// Author : Milian <mail@mili.de>
+function closetags($html) {
+#put all opened tags into an array
+	preg_match_all('#<([a-z]+)(?: .*)?(?<![/|/ ])>#iU', $html, $result);
+	$openedtags = $result[1]; #put all closed tags into an array
+	preg_match_all('#</([a-z]+)>#iU', $html, $result);
+	$closedtags = $result[1];
+
+	$len_opened = count($openedtags);
+	
+	# all tags are closed
+	if(count($closedtags) == $len_opened) {
+		return $html;
+	}
+
+	$openedtags = array_reverse($openedtags);
+	
+	# close tags
+	for($i=0; $i < $len_opened; $i++) {
+		if(!in_array($openedtags[$i], $closedtags)){
+			$html .= '</'.$openedtags[$i].'>';
+		} else {
+			unset($closedtags[array_search($openedtags[$i], $closedtags)]);
+		}
+	}
+	return $html;
+}
+
 // Fonction de comptage des mots
 function Limit_Words($Text, $NbWords, $htmlOK = false, $Cleaner = true, $CharsMore = array(true, ' [...]')) {
 	// On retire les balises HTML gênantes (optionnel)...
-	if($htmlOK == false) {
+	if($htmlOK == 'total') {
+		$Text = $Text;		
+	} else if($htmlOK == 'partial') {
+		$Text = strip_tags($Text,"<br><a><em><strong><cite><q><span><sup><sub><small><big><u><i><b><s><strike><ins><del>");
+	} else if($htmlOK == 'none') {
 		$Text = strip_tags($Text);
 	}
 
@@ -63,18 +96,24 @@ function Limit_Words($Text, $NbWords, $htmlOK = false, $Cleaner = true, $CharsMo
 			$NewText .= $CharsMore[1]."\n";
 		}	
 	}
+	$NewText = closetags($NewText);
 	return $NewText;
 }
 
 // Fonction de comptage des lettres
-function Limit_Letters($Text, $NbLetters, $htmlOK = false, $Cleaner = true, $CharsMore = array(true, ' [...]')) { 
-	// On retire les balises HTML gênantes (optionnel)...
-	if($htmlOK == false) {
-		$Text = strip_tags($Text);
+function Limit_Letters($Text, $NbLetters, $htmlOK = false, $Cleaner = true, $CharsMore = array(true, ' [...]')) {
+	// On coupe les mots après tant de lettres (hors balises HTML !)
+	if(strlen(strip_tags($Text)) >= $NbLetters+1) {
+		$Text = substr($Text, 0, $NbLetters);
 	}
-
-	if(strlen($Text) >= $NbLetters+1){
-		$NewText = substr($Text, 0, $NbLetters);
+	
+	// On retire les balises HTML gênantes (optionnel)...
+	if($htmlOK == 'total') {
+		$NewText = $Text;		
+	} else if($htmlOK == 'partial') {
+		$NewText = strip_tags($Text,"<br><a><em><strong><cite><q><span><sup><sub><small><big><u><i><b><s><strike><ins><del>");
+	} else if($htmlOK == 'none') {
+		$NewText = strip_tags($Text);
 	}
 	
 	if($Cleaner == true) {
@@ -97,32 +136,24 @@ function Limit_Letters($Text, $NbLetters, $htmlOK = false, $Cleaner = true, $Cha
 		if($CharsMore[0] == true) {
 			$NewText .= $CharsMore[1]."\n";
 		}
-		/*
-		// On termine la phrase proprement (mot complet ou ponctuation)
-		if(preg_match_all('#(.*)[.:;!?¡¿»")\]}]\s#i', $NewText, $args)) {
-			foreach($args[0] as $arg) {
-				$NewText = $arg;
-			}
-		} else if(preg_match_all('#(.*)[\s]#i', $NewText, $args)) {
-			foreach($args[0] as $arg) {
-				$NewText = $arg;
-			}
-		}
-		*/
 	} else {
 		// Ajoute des caractères de fin pour faire plus propre...
 		if($CharsMore[0] == true) {
 			$NewText .= $CharsMore[1]."\n";
 		}	
 	}
-
+	$NewText = closetags($NewText);
 	return $NewText; 
 }
 
-// Fonction de comptage des lettres
-function Limit_Tags($Text, $htmlOK = false, $CharsMore = array(true, ' [...]')) {
+// Fonction de récupération du premier paragraphe
+function Limit_Paragraph($Text, $htmlOK = false, $CharsMore = array(true, ' [...]')) {
 	// On retire les balises HTML gênantes (optionnel)...
-	if($htmlOK == false) {
+	if($htmlOK == 'total') {
+		$Text = $Text;		
+	} else if($htmlOK == 'partial') {
+		$Text = strip_tags($Text,"<br><a><em><strong><cite><q><span><sup><sub><small><big><u><i><b><s><strike><ins><del>");
+	} else if($htmlOK == 'none') {
 		$Text = strip_tags($Text);
 	}
 
@@ -156,24 +187,38 @@ function Limit_Tags($Text, $htmlOK = false, $CharsMore = array(true, ' [...]')) 
 		}
 	}
 	*/
+	$NewText = closetags($NewText);
 	return $NewText; 
 }
 
 // Fonction de comptage des lettres
-function Limit_More($Text, $htmlOK = false, $CharsMore = array(true, ' [...]')) {
+function Limit_More($Text, $htmlOK = 'none', $CharsMore = array(true, ' [...]')) {
 	// On retire les balises HTML gênantes (optionnel)...
-	if($htmlOK == true) {
+	if($htmlOK == 'total') {
+		$Text = $Text;
+	} else if($htmlOK == 'partial') {
+		$saveTags = array('<!--more-->');
+		$replaceTags = array('!!!MORE!!!');
+		$Text = str_ireplace($saveTags, $replaceTags, $Text);
+		$Text = strip_tags($Text,"<br><a><em><strong><cite><q><span><sup><sub><small><big><u><i><b><s><strike><ins><del>");
+		$Text = str_ireplace($replaceTags, $saveTags, $Text);
+	} else if($htmlOK == 'none') {
+		$saveTags = array('<!--more-->');
+		$replaceTags = array('!!!MORE!!!');
+		$Text = str_ireplace($saveTags, $replaceTags, $Text);
 		$Text = strip_tags($Text);
+		$Text = str_ireplace($replaceTags, $saveTags, $Text);
 	}
 
 	// On trouve des solutions pour couper avant la balise <!--more-->
-	if(stripos($Text,"&lt;!--more--&gt;")) {
-		$NewText = substr($Text,0,stripos($Text,"&lt;!--more--&gt;"));
+	if(stripos($Text,"<!--more-->")) {
+		$NewText = substr($Text,0,stripos($Text,"<!--more-->"));
 		// Ajoute des caractères de fin pour faire plus propre...
 		if($CharsMore[0] == true) {
 			$NewText .= $CharsMore[1]."\n";
 		}
 	}
+	$NewText = closetags($NewText);
 	return $NewText; 
 }
 ?>

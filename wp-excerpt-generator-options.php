@@ -6,6 +6,7 @@ function WP_Excerpt_Generator_update() {
 	// Réglages de base
 	$wp_excerpt_generator_save		= $_POST['wp_excerpt_generator_save'];
 	$wp_excerpt_generator_type		= $_POST['wp_excerpt_generator_type'];
+	$wp_excerpt_generator_status	= $_POST['wp_excerpt_generator_status'];
 	$wp_excerpt_generator_method	= $_POST['wp_excerpt_generator_method'];
 	$wp_excerpt_generator_nbletters	= $_POST['wp_excerpt_generator_nbletters'];
 	$wp_excerpt_generator_nbwords	= $_POST['wp_excerpt_generator_nbwords'];
@@ -16,6 +17,7 @@ function WP_Excerpt_Generator_update() {
 
 	update_option("wp_excerpt_generator_save", $wp_excerpt_generator_save);
 	update_option("wp_excerpt_generator_type", $wp_excerpt_generator_type);
+	update_option("wp_excerpt_generator_status", $wp_excerpt_generator_status);
 	update_option("wp_excerpt_generator_method", $wp_excerpt_generator_method);
 	update_option("wp_excerpt_generator_nbletters", $wp_excerpt_generator_nbletters);
 	update_option("wp_excerpt_generator_nbwords", $wp_excerpt_generator_nbwords);
@@ -32,10 +34,12 @@ function WP_Excerpt_Generator_update() {
 	}
 
 	// Si le code HTML est conservé
-	if(get_option("wp_excerpt_generator_htmlOK") == true) {
-		$htmlOK = true;
-	} else {
-		$htmlOK = false;
+	if(get_option("wp_excerpt_generator_htmlOK") == 'none') {
+		$htmlOK = 'none';
+	} else if(get_option("wp_excerpt_generator_htmlOK") == 'partial') {
+		$htmlOK = "partial";
+	} else if(get_option("wp_excerpt_generator_htmlOK") == 'total') {
+		$htmlOK = 'total';
 	}
 
 	// Si la chaîne doit être terminée par quelques caractères
@@ -59,13 +63,24 @@ function WP_Excerpt_Generator_update() {
 		$nbwords = 100;
 	}
 
+	// Récupère le statut des données dans la base de données
+	if(get_option("wp_excerpt_generator_status") == 'publish') {
+		$selectContent = "post_status = 'publish'";
+	} else if(get_option("wp_excerpt_generator_status") == 'future') {		
+		$selectContent = "post_status = 'future'";
+	} else if(get_option("wp_excerpt_generator_status") == 'publishfuture') {	
+		$selectContent = "(post_status = 'publish' OR post_status = 'future')";
+	} else {
+		$selectContent = "post_status = 'publish'";
+	}
+
 	// Récupère le type de contenus pour créer l'extrait et sélectionne des données dans la base de données
 	if(get_option("wp_excerpt_generator_type") == 'page') {
-		$selectContent = $wpdb->get_results("SELECT ID, post_content FROM $table_WP_Excerpt_Generator WHERE post_status = 'publish' AND post_type = 'page'");
+		$selectContent = $wpdb->get_results("SELECT ID, post_content FROM $table_WP_Excerpt_Generator WHERE ".$selectContent." AND post_type = 'page'");
 	} else if(get_option("wp_excerpt_generator_type") == 'post') {		
-		$selectContent = $wpdb->get_results("SELECT ID, post_content FROM $table_WP_Excerpt_Generator WHERE post_status = 'publish' AND post_type = 'post'");
+		$selectContent = $wpdb->get_results("SELECT ID, post_content FROM $table_WP_Excerpt_Generator WHERE ".$selectContent." AND post_type = 'post'");
 	} else if(get_option("wp_excerpt_generator_type") == 'pagepost') {	
-		$selectContent = $wpdb->get_results("SELECT ID, post_content FROM $table_WP_Excerpt_Generator WHERE post_status = 'publish' AND (post_type = 'page' OR post_type = 'post')");
+		$selectContent = $wpdb->get_results("SELECT ID, post_content FROM $table_WP_Excerpt_Generator WHERE ".$selectContent." AND (post_type = 'page' OR post_type = 'post')");
 	}
 
 	// Boucle de mise à jour des contenus
@@ -75,7 +90,7 @@ function WP_Excerpt_Generator_update() {
 			
 		// On adapte la fonction de formatage en fonction de la méthode utilisée
 		if(get_option("wp_excerpt_generator_method") == 'paragraph') {
-			$formatText[] = Limit_Tags($content, $htmlOK, $break);
+			$formatText[] = Limit_Paragraph($content, $htmlOK, $break);
 		} else if(get_option("wp_excerpt_generator_method") == 'words') {
 			$formatText[] = Limit_Words($content, $nbwords, $htmlOK, $cleaner, $break);
 		} else if(get_option("wp_excerpt_generator_method") == 'letters') {
@@ -172,6 +187,14 @@ function cacher(object) {
             </select>
         </p>
         <p>
+            <label for="wp_excerpt_generator_status"><strong><?php _e('Générer les extraits pour les contenus publiés ou planifiés ?','WP-Excerpt-Generator'); ?></strong></label><br />
+            <select name="wp_excerpt_generator_status" id="wp_excerpt_generator_status" style="margin-top:3px;width:20%;border:1px solid #ccc;">
+                <option value="publish" <?php if(get_option("wp_excerpt_generator_status") == 'publish') { echo 'selected="selected"'; } ?>><?php _e('Contenus publiés','WP-Excerpt-Generator'); ?></option>
+                <option value="future" <?php if(get_option("wp_excerpt_generator_status") == 'future') { echo 'selected="selected"'; } ?>><?php _e('Contenus planifiés','WP-Excerpt-Generator'); ?></option>
+                <option value="publishfuture" <?php if(get_option("wp_excerpt_generator_status") == 'publishfuture') { echo 'selected="selected"'; } ?>><?php _e('Les deux','WP-Excerpt-Generator'); ?></option>
+            </select>
+        </p>
+        <p>
             <label for="wp_excerpt_generator_method"><strong><?php _e('Méthode de création des extraits','WP-Excerpt-Generator'); ?></strong></label><br />
             <select name="wp_excerpt_generator_method" id="wp_excerpt_generator_method" style="margin-top:3px;width:40%;border:1px solid #ccc;">
                 <option value="paragraph" onclick="cacher('blockWords'); cacher('blockLetters'); cacher('blockClean');" <?php if(get_option("wp_excerpt_generator_method") == 'paragraph') { echo 'selected="selected"'; } ?>><?php _e('Premier paragraphe','WP-Excerpt-Generator'); ?></option>
@@ -200,8 +223,9 @@ function cacher(object) {
         <p>
             <label for="wp_excerpt_generator_htmlOK"><strong><?php _e('Conserver le code HTML ? (déconseillé)','WP-Excerpt-Generator'); ?></strong></label><br />
             <select name="wp_excerpt_generator_htmlOK" id="wp_excerpt_generator_htmlOK" style="margin-top:3px;width:20%;border:1px solid #ccc;">
-                <option value="1" <?php if(get_option("wp_excerpt_generator_htmlOK") == true) { echo 'selected="selected"'; } ?>><?php _e('Oui','WP-Excerpt-Generator'); ?></option>
-                <option value="0" <?php if(get_option("wp_excerpt_generator_htmlOK") == false) { echo 'selected="selected"'; } ?>><?php _e('Non','WP-Excerpt-Generator'); ?></option>
+                <option value="total" <?php if(get_option("wp_excerpt_generator_htmlOK") == 'total') { echo 'selected="selected"'; } ?>><?php _e('Totalement','WP-Excerpt-Generator'); ?></option>
+                <option value="partial" <?php if(get_option("wp_excerpt_generator_htmlOK") == 'partial') { echo 'selected="selected"'; } ?>><?php _e('Partiellement (gras, italique...)','WP-Excerpt-Generator'); ?></option>
+                <option value="none" <?php if(get_option("wp_excerpt_generator_htmlOK") == 'none') { echo 'selected="selected"'; } ?>><?php _e('Pas du tout','WP-Excerpt-Generator'); ?></option>
             </select>
             <br/><em><?php _e('Attention ! Si vous coupez par groupes de mots ou lettres, vous risquez de casser la logique du code HTML...','WP-Excerpt-Generator'); ?></em>
         </p>
