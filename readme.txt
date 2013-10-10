@@ -7,7 +7,7 @@ Tags: extrait, extraits, extract, extracts, clip, clips, excerpt, excerpts, gene
 License: GPLv2 or later
 Requires at least: 3.1
 Tested up to: 3.6.1
-Stable Tag: 1.5
+Stable Tag: 1.6
 
 "WP Excerpt Generator" est un g&eacute;n&eacute;rateur d'extraits entièrement modulable. (plugin is a complete excerpt generator)
 
@@ -24,6 +24,7 @@ Quelques exemples d'options existantes :
 <li>Possibilit&eacute; de couper la fin de cha&icirc;ne proprement...</li>
 <li>Possibilit&eacute; de conserver les extraits d&eacute;j&agrave; existants dans la base de donn&eacute;es</li>
 <li>Nettoyage des balises HTML impropres ou non ferm&eacute;es</li>
+<li>...</li>
 </ul>
 </p>
 
@@ -38,6 +39,7 @@ Some examples of existing options:
 <li>Ability to cut the end of the string properly ...</li>
 <li>Ability to keep existing excerpts in the database</li>
 <li>Cleaning HTML non closed tags</li>
+<li>...</li>
 </ul>
 </p>
 
@@ -74,3 +76,9 @@ Some examples of existing options:
 - Modification des options de conservation du code HTML dans les extraits : total, partiel ou pas conserv&eacute; (Changing the option of cleaning the HTML code in the extracts: total, partial or not retained)
 - Probl&egrave;me r&eacute;solu pour les balises HTML non ferm&eacute;es lorsque l'on coupe la cha&icirc;ne au mauvais endroit (Problem solved for unclosed HTML tags when it is cut in the wrong place)
 - Quelques minuscules d&eacute;bogages (Some tiny bug fixes)
+
+= Version 1.6 (10/10/2013) =
+
+- Correction de petits bugs avec la fermeture des balises HTML (Fixed small bugs with the closing HTML tags)
+- Possibilit&eacute; de conserver les sauts de ligne (ou non) lorsque l'on conserve partiellement le code HTML (Ability to maintain line breaks (or not) when the HTML is partially preserved)
+- Possibilit&eacute; d'utiliser son propre d&eacute;limiteur pour couper les extraits apr&egrave;s un mot pr&eacute;cis, etc. (Ability to use its own delimiter to cut the clips after a specific word...)
