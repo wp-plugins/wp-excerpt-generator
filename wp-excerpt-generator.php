@@ -71,13 +71,13 @@ function WP_Excerpt_Generator_desinstall() {
 function WP_Excerpt_Generator_Upgrade() {
     global $WP_Excerpt_Generator_Version;
     if(get_site_option('wp_excerpt_generator_version') != $WP_Excerpt_Generator_Version) {
-		if(!isset(get_site_option('wp_excerpt_generator_htmlBR'))) {
+		if(get_site_option('wp_excerpt_generator_htmlBR') == false) {
 			add_option("wp_excerpt_generator_htmlBR", true);
 		}
-		if(!isset(get_site_option('wp_excerpt_generator_status'))) {
+		if(get_site_option('wp_excerpt_generator_status') == false) {
 			add_option("wp_excerpt_generator_status", 'publish');
 		}
-		if(!isset(get_site_option('wp_excerpt_generator_owntag'))) {
+		if(get_site_option('wp_excerpt_generator_owntag') == false) {
 			add_option("wp_excerpt_generator_owntag", '');
 		}
         update_option("wp_excerpt_generator_version", $WP_Excerpt_Generator_Version);
