@@ -61,7 +61,7 @@ function WP_Excerpt_Generator_update() {
 	}
 
 	// Vérifie que l'option "Fin de chaîne"
-	if($wp_excerpt_generator_method == "owntag" && !empty($wp_excerpt_generator_owntag)) {
+	if($wp_excerpt_generator_method == "owntag" && is_string($wp_excerpt_generator_owntag) && !empty($wp_excerpt_generator_owntag)) {
 		$owntag = get_option("wp_excerpt_generator_owntag");
 	} else {
 		$owntag = '';
@@ -124,11 +124,12 @@ function WP_Excerpt_Generator_update() {
 	$arrayContent = array_combine($ID, $formatText);
 	if(get_option("wp_excerpt_generator_save") == true) {
 		foreach($arrayContent as $key => $value) {
-			$wp_excerpt_generator_update = mysql_query("UPDATE $table_WP_Excerpt_Generator SET post_excerpt = '".addslashes($value)."' WHERE ID = '".$key."' AND (post_excerpt IS NULL OR post_excerpt = '')");
+			$wp_excerpt_generator_update = $wpdb->query("UPDATE $table_WP_Excerpt_Generator SET post_excerpt = '".mysql_real_escape_string(addslashes($value))."' WHERE ID = '".mysql_real_escape_string(htmlspecialchars($key))."' AND (post_excerpt IS NULL OR post_excerpt = '')");
 		}
 	} else {
 		foreach($arrayContent as $key => $value) {
-			$wp_excerpt_generator_update = mysql_query("UPDATE $table_WP_Excerpt_Generator SET post_excerpt = '".addslashes($value)."' WHERE ID = '".$key."'");
+			$where = '';
+			$wp_excerpt_generator_update = $wpdb->update($table_WP_Excerpt_Generator, array('post_excerpt' => $value), array('ID' => $key));
 		}
 	}
 }
