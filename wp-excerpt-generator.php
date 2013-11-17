@@ -18,7 +18,7 @@ $WP_Excerpt_Generator_Version = "1.7";
 // Gestion des langues
 function WP_Excerpt_Generator_Lang() {
    $path = dirname(plugin_basename(__FILE__)).'/lang/';
-   load_plugin_textdomain('WP_Excerpt_Generator', NULL, $path);
+   load_plugin_textdomain('WP-Excerpt-Generator', NULL, $path);
 }
 add_action('plugins_loaded', 'WP_Excerpt_Generator_Lang');
 
