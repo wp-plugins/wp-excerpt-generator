@@ -1,33 +1,47 @@
 <?php
 // Fonction de fermeture automatique des balises non fermées...
 // Author : Milian <mail@mili.de>
+// Fonction très remaniée à cause des bugs initiaux liés aux <br/>, etc.
 function closetags($html) {
-	#put all opened tags into an array
-	preg_match_all('#<([a-z]+)(?: .*)?(?<![/|/ ])>#iU', $html, $result);
+	// Ajoute toutes les balises ouvertes dans un tableau
+	preg_match_all('#<([a-zA-Z]+)(?: .*)?>#iU', $html, $result);
 	$openedtags = $result[1];
 
-	#put all closed tags into an array
+	// Ajoute toutes les balises fermées dans un tableau
 	preg_match_all('#</([a-z]+)>#iU', $html, $result);
 	$closedtags = $result[1];
 
-	$len_opened = count($openedtags);
-	
-	# all tags are closed
-	if(count($closedtags) == $len_opened) {
-		return $html;
-	}
-
-	$openedtags = array_reverse($openedtags);
-	
-	# close tags
-	for($i=0; $i < $len_opened; $i++) {
-		if(!in_array($openedtags[$i], $closedtags)){
-			$html .= '</'.$openedtags[$i].'>';
-		} else {
-			unset($closedtags[array_search($openedtags[$i], $closedtags)]);
+	// Nettoie les <br> et <hr> inutiles...
+	$excludedtags = array('br', 'hr');
+	foreach($openedtags as $k => $val) {
+		if(in_array($val,$excludedtags)) {
+			$val = '';
+		}
+		if(empty($val)) {
+			unset($openedtags[$k]);
 		}
 	}
-	return $html;
+
+	// On compte le nombre de balises ouvertes et fermées
+	$len_opened = count($openedtags);
+	$len_closed = count($closedtags);
+	
+	// Si toutes les balises sont bien fermées
+	if($len_closed == $len_opened) {
+		return $html;
+	} else {
+		$openedtags = array_reverse($openedtags);
+	
+		// On ferme les balises proprement
+		for($i=0; $i < $len_opened; $i++) {
+			if(!in_array($openedtags[$i], $closedtags)){
+				$html .= '</'.$openedtags[$i].'>';
+			} else {
+				unset($closedtags[array_search($openedtags[$i], $closedtags)]);
+			}
+		}
+		return $html;
+	}
 }
 
 // Fonction de comptage des mots
@@ -187,7 +201,7 @@ function Limit_Paragraph($Text, $htmlOK = false, $htmlBR = true, $CharsMore = ar
 	return $NewText; 
 }
 
-// Fonction de comptage des lettres
+// Fonction de césure avant la balise <!--more-->
 function Limit_More($Text, $htmlOK = 'none', $htmlBR = true, $CharsMore = array(true, ' [...]')) {
 	// On retire les balises HTML gênantes (optionnel)...
 	if($htmlOK == 'total') {
@@ -226,7 +240,7 @@ function Limit_More($Text, $htmlOK = 'none', $htmlBR = true, $CharsMore = array(
 	return $NewText; 
 }
 
-// Fonction de comptage des lettres
+// Fonction de césure après une chaine libre
 function Limit_OwnTag($Text, $owntag = '', $htmlOK = 'none', $htmlBR = true, $CharsMore = array(true, ' [...]')) {
 	// On retire les balises HTML gênantes (optionnel)...
 	if($htmlOK == 'total') {

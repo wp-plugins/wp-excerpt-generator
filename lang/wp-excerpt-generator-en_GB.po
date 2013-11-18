@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: WP Excerpt Generator\n"
-"POT-Creation-Date: 2013-10-10 19:13+0100\n"
-"PO-Revision-Date: 2013-10-10 19:15+0100\n"
+"POT-Creation-Date: 2013-11-18 16:39+0100\n"
+"PO-Revision-Date: 2013-11-18 16:40+0100\n"
 "Last-Translator: Mathieu Chartier <mathieu.chartier@internet-formation.fr>\n"
 "Language-Team: Mathieu Chartier <mathieu.chartier@internet-formation.fr>\n"
 "Language: English\n"
@@ -14,23 +14,23 @@ msgstr ""
 "X-Poedit-Basepath: .\n"
 "Plural-Forms: plurals=2;plural=n>1;\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Poedit-SearchPath-0: C:\\Users\\Carter\\Desktop\\wp-excerpt-generator\n"
+"X-Poedit-SearchPath-0: ..\n"
 
-#: C:\Users\Carter\Desktop\wp-excerpt-generator/wp-excerpt-generator-options.php:154
-#: C:\Users\Carter\Desktop\wp-excerpt-generator/wp-excerpt-generator-options.php:281
+#: ../wp-excerpt-generator-options.php:155
+#: ../wp-excerpt-generator-options.php:289
 msgid "Enregistrer"
 msgstr "Update"
 
-#: C:\Users\Carter\Desktop\wp-excerpt-generator/wp-excerpt-generator-options.php:159
-#: C:\Users\Carter\Desktop\wp-excerpt-generator/wp-excerpt-generator-options.php:295
+#: ../wp-excerpt-generator-options.php:160
+#: ../wp-excerpt-generator-options.php:303
 msgid "Supprimer"
 msgstr "Delete"
 
-#: C:\Users\Carter\Desktop\wp-excerpt-generator/wp-excerpt-generator-options.php:168
-msgid "Réglages de WP Excerpt Generator."
+#: ../wp-excerpt-generator-options.php:170
+msgid "Réglages de WP Excerpt Generator"
 msgstr "WP Excerpt Generator Settings"
 
-#: C:\Users\Carter\Desktop\wp-excerpt-generator/wp-excerpt-generator-options.php:169
+#: ../wp-excerpt-generator-options.php:173
 msgid ""
 "<strong>WP Excerpt Generator</strong> est un générateur automatisé "
 "d'extraits pour WordPress."
@@ -38,21 +38,21 @@ msgstr ""
 "<strong>WP Excerpt Generator</strong> is an automated extracts generator for "
 "WordPress."
 
-#: C:\Users\Carter\Desktop\wp-excerpt-generator/wp-excerpt-generator-options.php:170
+#: ../wp-excerpt-generator-options.php:174
 msgid ""
 "Plusieurs méthodes sont exploitables pour générer des extraits comme bon "
 "nous semble :"
 msgstr "Several methods can be exploited to generate excerpts as we want:"
 
-#: C:\Users\Carter\Desktop\wp-excerpt-generator/wp-excerpt-generator-options.php:172
+#: ../wp-excerpt-generator-options.php:176
 msgid "Conserver ou non les extraits déjà existants"
 msgstr "Keep or not the existing excerpts"
 
-#: C:\Users\Carter\Desktop\wp-excerpt-generator/wp-excerpt-generator-options.php:173
+#: ../wp-excerpt-generator-options.php:177
 msgid "Choisir le type de contenus ciblés (pages, articles ou les deux)"
 msgstr "Choose the type of targeted content (pages, items or both)"
 
-#: C:\Users\Carter\Desktop\wp-excerpt-generator/wp-excerpt-generator-options.php:174
+#: ../wp-excerpt-generator-options.php:178
 msgid ""
 "Choisir la méthode de création (premier paragraphe, nombre de mots, nombre "
 "de lettres...)"
@@ -60,15 +60,15 @@ msgstr ""
 "Choose the method of creation (first paragraph, number of words, number of "
 "letters ...)"
 
-#: C:\Users\Carter\Desktop\wp-excerpt-generator/wp-excerpt-generator-options.php:175
+#: ../wp-excerpt-generator-options.php:179
 msgid "Affiner l'affichage final"
 msgstr "Refine the final display"
 
-#: C:\Users\Carter\Desktop\wp-excerpt-generator/wp-excerpt-generator-options.php:176
+#: ../wp-excerpt-generator-options.php:180
 msgid "Conserver ou non le code HTML dans l'extrait (déconseillé)"
 msgstr "Keep or not the HTML code in the excerpt (not recommended)"
 
-#: C:\Users\Carter\Desktop\wp-excerpt-generator/wp-excerpt-generator-options.php:178
+#: ../wp-excerpt-generator-options.php:182
 msgid ""
 "<em>N.B. : cette extension n'est pas parfaite mais elle aide à remplir les "
 "extraits manquants sans difficulté. N'hésitez pas à contacter <a href="
@@ -80,23 +80,23 @@ msgstr ""
 "fr\" target=\"_blank\">Mathieu Chartier</a>, the creator of the plugin, for "
 "more information.</ em>"
 
-#: C:\Users\Carter\Desktop\wp-excerpt-generator/wp-excerpt-generator-options.php:193
+#: ../wp-excerpt-generator-options.php:201
 msgid "Paramétrage général"
 msgstr "General Settings"
 
-#: C:\Users\Carter\Desktop\wp-excerpt-generator/wp-excerpt-generator-options.php:195
-msgid "Conserver les extraits existants ou les remplacer ?"
-msgstr "Keep the existing excerpts or replace them?"
-
-#: C:\Users\Carter\Desktop\wp-excerpt-generator/wp-excerpt-generator-options.php:197
+#: ../wp-excerpt-generator-options.php:204
 msgid "Conserver"
 msgstr "Keep"
 
-#: C:\Users\Carter\Desktop\wp-excerpt-generator/wp-excerpt-generator-options.php:198
+#: ../wp-excerpt-generator-options.php:205
 msgid "Remplacer"
 msgstr "Replace"
 
-#: C:\Users\Carter\Desktop\wp-excerpt-generator/wp-excerpt-generator-options.php:200
+#: ../wp-excerpt-generator-options.php:207
+msgid "Conserver les extraits existants ou les remplacer ?"
+msgstr "Keep the existing excerpts or replace them?"
+
+#: ../wp-excerpt-generator-options.php:208
 msgid ""
 "L'option permet de créer les extraits manquants sans effacer les existants, "
 "ou de tout remplacer..."
@@ -104,67 +104,67 @@ msgstr ""
 "The option to create missing excerpts without erasing the existing excerpts. "
 "Otherwise, everything is replaced by the new excerpts ..."
 
-#: C:\Users\Carter\Desktop\wp-excerpt-generator/wp-excerpt-generator-options.php:203
-msgid "Générer les extraits pour quels contenus ?"
-msgstr "Generate excerpts for what content?"
-
-#: C:\Users\Carter\Desktop\wp-excerpt-generator/wp-excerpt-generator-options.php:205
+#: ../wp-excerpt-generator-options.php:212
 msgid "Pages"
 msgstr "Pages"
 
-#: C:\Users\Carter\Desktop\wp-excerpt-generator/wp-excerpt-generator-options.php:206
+#: ../wp-excerpt-generator-options.php:213
 msgid "Articles"
 msgstr "Posts"
 
-#: C:\Users\Carter\Desktop\wp-excerpt-generator/wp-excerpt-generator-options.php:207
+#: ../wp-excerpt-generator-options.php:214
 msgid "Articles + Pages"
 msgstr "Posts + Pages"
 
-#: C:\Users\Carter\Desktop\wp-excerpt-generator/wp-excerpt-generator-options.php:211
-msgid "Générer les extraits pour les contenus publiés ou planifiés ?"
-msgstr "Generate excerpts for content published or planned?"
+#: ../wp-excerpt-generator-options.php:216
+msgid "Générer les extraits pour quels contenus ?"
+msgstr "Generate excerpts for what content?"
 
-#: C:\Users\Carter\Desktop\wp-excerpt-generator/wp-excerpt-generator-options.php:213
+#: ../wp-excerpt-generator-options.php:220
 msgid "Contenus publiés"
 msgstr "published content"
 
-#: C:\Users\Carter\Desktop\wp-excerpt-generator/wp-excerpt-generator-options.php:214
+#: ../wp-excerpt-generator-options.php:221
 msgid "Contenus planifiés"
 msgstr "scheduled content"
 
-#: C:\Users\Carter\Desktop\wp-excerpt-generator/wp-excerpt-generator-options.php:215
+#: ../wp-excerpt-generator-options.php:222
 msgid "Les deux"
 msgstr "Both"
 
-#: C:\Users\Carter\Desktop\wp-excerpt-generator/wp-excerpt-generator-options.php:219
-msgid "Méthode de création des extraits"
-msgstr "Creation method for the excerpts"
+#: ../wp-excerpt-generator-options.php:224
+msgid "Générer les extraits pour les contenus publiés ou planifiés ?"
+msgstr "Generate excerpts for content published or planned?"
 
-#: C:\Users\Carter\Desktop\wp-excerpt-generator/wp-excerpt-generator-options.php:221
+#: ../wp-excerpt-generator-options.php:228
 msgid "Premier paragraphe"
 msgstr "First paragraph"
 
-#: C:\Users\Carter\Desktop\wp-excerpt-generator/wp-excerpt-generator-options.php:222
+#: ../wp-excerpt-generator-options.php:229
 msgid "Nombre de mots (à définir)"
 msgstr "Number of words (to be defined)"
 
-#: C:\Users\Carter\Desktop\wp-excerpt-generator/wp-excerpt-generator-options.php:223
+#: ../wp-excerpt-generator-options.php:230
 msgid "Nombre de lettres (à définir)"
 msgstr "Number of letters (to be defined)"
 
-#: C:\Users\Carter\Desktop\wp-excerpt-generator/wp-excerpt-generator-options.php:224
+#: ../wp-excerpt-generator-options.php:231
 msgid "Avant la balise MORE de WordPress"
 msgstr "Before the MORE tag WordPress"
 
-#: C:\Users\Carter\Desktop\wp-excerpt-generator/wp-excerpt-generator-options.php:225
+#: ../wp-excerpt-generator-options.php:232
 msgid "Avant un délimiteur personnalisé ?"
 msgstr "Before a custom delimiter?"
 
-#: C:\Users\Carter\Desktop\wp-excerpt-generator/wp-excerpt-generator-options.php:229
+#: ../wp-excerpt-generator-options.php:234
+msgid "Méthode de création des extraits"
+msgstr "Creation method for the excerpts"
+
+#: ../wp-excerpt-generator-options.php:238
 msgid "Choisir le délimiteur (chaîne de caractère)"
 msgstr "Choice the delimiter (string)"
 
-#: C:\Users\Carter\Desktop\wp-excerpt-generator/wp-excerpt-generator-options.php:231
+#: ../wp-excerpt-generator-options.php:239
 msgid ""
 "L'option permet de couper le texte avant la chaîne choisi.<br/>Exemples : un "
 "mot, un tag inventé, etc."
@@ -172,55 +172,55 @@ msgstr ""
 "The option to turn off the text before the selected string.<br/>Examples: a "
 "word invented a tag..."
 
-#: C:\Users\Carter\Desktop\wp-excerpt-generator/wp-excerpt-generator-options.php:234
+#: ../wp-excerpt-generator-options.php:243
 msgid "Nombre de mots à conserver (maximum)"
 msgstr "Number of words to keep (maximum)"
 
-#: C:\Users\Carter\Desktop\wp-excerpt-generator/wp-excerpt-generator-options.php:238
+#: ../wp-excerpt-generator-options.php:247
 msgid "Nombre de lettres à conserver (maximum)"
 msgstr "Number of letters to keep (maximum)"
 
-#: C:\Users\Carter\Desktop\wp-excerpt-generator/wp-excerpt-generator-options.php:243
-msgid "Terminer l'extrait par une ponctuation propre ? (conseillé)"
-msgstr "Finish excerpt with a clean punctuation? (recommended)"
-
-#: C:\Users\Carter\Desktop\wp-excerpt-generator/wp-excerpt-generator-options.php:245
-#: C:\Users\Carter\Desktop\wp-excerpt-generator/wp-excerpt-generator-options.php:262
-#: C:\Users\Carter\Desktop\wp-excerpt-generator/wp-excerpt-generator-options.php:270
-#: C:\Users\Carter\Desktop\wp-excerpt-generator/wp-excerpt-generator-options.php:291
+#: ../wp-excerpt-generator-options.php:252
+#: ../wp-excerpt-generator-options.php:269
+#: ../wp-excerpt-generator-options.php:277
+#: ../wp-excerpt-generator-options.php:298
 msgid "Oui"
 msgstr "Yes"
 
-#: C:\Users\Carter\Desktop\wp-excerpt-generator/wp-excerpt-generator-options.php:246
-#: C:\Users\Carter\Desktop\wp-excerpt-generator/wp-excerpt-generator-options.php:263
-#: C:\Users\Carter\Desktop\wp-excerpt-generator/wp-excerpt-generator-options.php:271
-#: C:\Users\Carter\Desktop\wp-excerpt-generator/wp-excerpt-generator-options.php:292
+#: ../wp-excerpt-generator-options.php:253
+#: ../wp-excerpt-generator-options.php:270
+#: ../wp-excerpt-generator-options.php:278
+#: ../wp-excerpt-generator-options.php:299
 msgid "Non"
 msgstr "No"
 
-#: C:\Users\Carter\Desktop\wp-excerpt-generator/wp-excerpt-generator-options.php:248
+#: ../wp-excerpt-generator-options.php:255
+msgid "Terminer l'extrait par une ponctuation propre ? (conseillé)"
+msgstr "Finish excerpt with a clean punctuation? (recommended)"
+
+#: ../wp-excerpt-generator-options.php:256
 msgid ""
 "L'option permet de finir les phrases proprement par une ponctuation logique."
 msgstr ""
 "The option to end sentences withclean punctuation (\".\", \"?\", \"!\"...)."
 
-#: C:\Users\Carter\Desktop\wp-excerpt-generator/wp-excerpt-generator-options.php:251
-msgid "Conserver le code HTML ? (déconseillé)"
-msgstr "Keep the HTML code ? (not recommended)"
-
-#: C:\Users\Carter\Desktop\wp-excerpt-generator/wp-excerpt-generator-options.php:253
+#: ../wp-excerpt-generator-options.php:260
 msgid "Totalement"
 msgstr "Keep all HTML code"
 
-#: C:\Users\Carter\Desktop\wp-excerpt-generator/wp-excerpt-generator-options.php:254
+#: ../wp-excerpt-generator-options.php:261
 msgid "Partiellement (gras, italique...)"
 msgstr "Partially (bold, italic ...)"
 
-#: C:\Users\Carter\Desktop\wp-excerpt-generator/wp-excerpt-generator-options.php:255
+#: ../wp-excerpt-generator-options.php:262
 msgid "Pas du tout"
 msgstr "No HTML"
 
-#: C:\Users\Carter\Desktop\wp-excerpt-generator/wp-excerpt-generator-options.php:257
+#: ../wp-excerpt-generator-options.php:264
+msgid "Conserver le code HTML ? (déconseillé)"
+msgstr "Keep the HTML code ? (not recommended)"
+
+#: ../wp-excerpt-generator-options.php:265
 msgid ""
 "Attention ! Si vous coupez par groupes de mots ou lettres, vous risquez de "
 "casser la logique du code HTML..."
@@ -228,38 +228,34 @@ msgstr ""
 "Caution! If you cut through groups of words or letters, you may break the "
 "logic of HTML code ..."
 
-#: C:\Users\Carter\Desktop\wp-excerpt-generator/wp-excerpt-generator-options.php:260
+#: ../wp-excerpt-generator-options.php:272
 msgid "Conserver les sauts de lignes ?"
 msgstr "Keep line breaks?"
 
-#: C:\Users\Carter\Desktop\wp-excerpt-generator/wp-excerpt-generator-options.php:265
-#: C:\Users\Carter\Desktop\wp-excerpt-generator/wp-excerpt-generator-options.php:273
+#: ../wp-excerpt-generator-options.php:273
+#: ../wp-excerpt-generator-options.php:281
 msgid ""
 "L'option permet d'ajouter quelques caractères pour faire comprendre que le "
 "texte continu."
 msgstr "The option to add characters to understand that the continuous text."
 
-#: C:\Users\Carter\Desktop\wp-excerpt-generator/wp-excerpt-generator-options.php:268
+#: ../wp-excerpt-generator-options.php:280
 msgid "Ajouter une chaîne de fin à l'extrait ?"
 msgstr "Add a string to the end of the excerpt?"
 
-#: C:\Users\Carter\Desktop\wp-excerpt-generator/wp-excerpt-generator-options.php:276
+#: ../wp-excerpt-generator-options.php:285
 msgid "Chaîne de caractère affichée après l'extrait"
 msgstr "String displayed after the excerpt"
 
-#: C:\Users\Carter\Desktop\wp-excerpt-generator/wp-excerpt-generator-options.php:278
+#: ../wp-excerpt-generator-options.php:286
 msgid "Exemples : \" (...)\", \" [...]\", \" ...\""
 msgstr "For example : \" (...)\", \" [...]\", \" ...\""
 
-#: C:\Users\Carter\Desktop\wp-excerpt-generator/wp-excerpt-generator-options.php:287
+#: ../wp-excerpt-generator-options.php:295
 msgid "Nettoyage des extraits..."
 msgstr "Cleaning excerpts ..."
 
-#: C:\Users\Carter\Desktop\wp-excerpt-generator/wp-excerpt-generator-options.php:289
-msgid "Supprimer tous les extraits de la base ?"
-msgstr "Delete all excerpt from the database?"
-
-#: C:\Users\Carter\Desktop\wp-excerpt-generator/wp-excerpt-generator-options.php:291
+#: ../wp-excerpt-generator-options.php:298
 msgid ""
 "Etes-vous sûrs de vouloir supprimer les extraits existants ?\\nN.B. : aucun "
 "extrait ne sera conservé !"
@@ -267,7 +263,11 @@ msgstr ""
 "Are you sure you want to delete the existing excerpts?\\nNB: no extract will "
 "be retained!"
 
-#: C:\Users\Carter\Desktop\wp-excerpt-generator/wp-excerpt-generator-options.php:295
+#: ../wp-excerpt-generator-options.php:301
+msgid "Supprimer tous les extraits de la base ?"
+msgstr "Delete all excerpt from the database?"
+
+#: ../wp-excerpt-generator-options.php:303
 msgid ""
 "Dernière chance avant la suppression complète des extraits...\\nVous êtes "
 "toujours sûrs de vous ?"
