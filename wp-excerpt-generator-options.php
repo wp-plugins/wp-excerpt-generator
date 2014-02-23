@@ -369,8 +369,8 @@ function cacher(object) {
     <form method="post" action="">
 		<p class="trNew">
 			<?php
-                $existingTitleExcerpt = $wpdb->get_results("SELECT post_title FROM $wpdb->posts WHERE post_status = 'publish' AND post_title !='' AND post_excerpt != ''"); // Lister les extraits existants
-				$existingIdExcerpt = $wpdb->get_results("SELECT ID FROM $wpdb->posts WHERE post_status = 'publish' AND post_title !='' AND post_excerpt != ''"); // Lister les extraits existants
+                $existingTitleExcerpt = $wpdb->get_results("SELECT post_title FROM $wpdb->posts WHERE post_status = 'publish' AND post_title !='' AND post_excerpt != '' ORDER BY post_date DESC"); // Lister les extraits existants
+				$existingIdExcerpt = $wpdb->get_results("SELECT ID FROM $wpdb->posts WHERE post_status = 'publish' AND post_title !='' AND post_excerpt != '' ORDER BY post_date DESC"); // Lister les extraits existants
                 foreach($existingTitleExcerpt as $excerpt) {
 					foreach($excerpt as $TitleExcerpt) {
                         $tabTitleExcerpt[] = $TitleExcerpt;	
