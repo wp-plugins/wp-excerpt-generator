@@ -29,7 +29,11 @@ function WP_Excerpt_Generator_update() {
 	update_option("wp_excerpt_generator_break", $wp_excerpt_generator_break);
 	update_option("wp_excerpt_generator_htmlOK", $wp_excerpt_generator_htmlOK);
 	update_option("wp_excerpt_generator_htmlBR", $wp_excerpt_generator_htmlBR);
-	
+}
+
+// Fonction de génération manuelle des extraits
+function WP_Excerpt_Generator_generate() {
+	global $wpdb, $table_WP_Excerpt_Generator; // insérer les variables globales
 	// Si la chaîne doit se terminer par une ponctuation logique
 	if(get_option("wp_excerpt_generator_cleaner") == true) {
 		$cleaner = true;
@@ -128,16 +132,15 @@ function WP_Excerpt_Generator_update() {
 		}
 	} else {
 		foreach($arrayContent as $key => $value) {
-			$where = '';
 			$wp_excerpt_generator_update = $wpdb->update($table_WP_Excerpt_Generator, array('post_excerpt' => $value), array('ID' => $key));
 		}
 	}
 }
 
-// Fonction de gestion du générateur automatique d'extraits...
+// Fonction de lancement du générateur automatique d'extraits...
 function WP_Excerpt_Generator_update_maj_auto() {
 	global $wpdb, $table_WP_Excerpt_Generator; // insérer les variables globales
-	$wp_excerpt_generator_maj		= $_POST['wp_excerpt_generator_maj'];
+	$wp_excerpt_generator_maj = $_POST['wp_excerpt_generator_maj'];
 	update_option("wp_excerpt_generator_maj", $wp_excerpt_generator_maj);
 }
 
@@ -183,6 +186,11 @@ function WP_Excerpt_Generator_Callback() {
 	// Déclencher la fonction de mise à jour (upload)
 	if(isset($_POST['wp_excerpt_generator_action']) && $_POST['wp_excerpt_generator_action'] == __('Enregistrer' , 'WP-Excerpt-Generator')) {
 		WP_Excerpt_Generator_update();
+	}
+	
+	// Déclencher la fonction de mise à jour (upload)
+	if(isset($_POST['wp_excerpt_generator_generate']) && $_POST['wp_excerpt_generator_generate'] == __('Générer les extraits' , 'WP-Excerpt-Generator')) {
+		WP_Excerpt_Generator_generate();
 	}
 	
 	// Déclencher la fonction de mise à jour automatique des extraits (upload)
@@ -327,7 +335,10 @@ function cacher(object) {
             <br/><em><?php _e('Exemples : " (...)", " [...]", " ..."','WP-Excerpt-Generator'); ?></em>
         </p>
         
-    	<p class="submit"><input type="submit" name="wp_excerpt_generator_action" class="button-primary" value="<?php _e('Enregistrer' , 'WP-Excerpt-Generator'); ?>" /></p>
+    	<p class="submit">
+        	<input type="submit" name="wp_excerpt_generator_action" class="button-primary" value="<?php _e('Enregistrer' , 'WP-Excerpt-Generator'); ?>" />
+            <input type="submit" name="wp_excerpt_generator_generate" class="button-primary" value="<?php _e('Générer les extraits' , 'WP-Excerpt-Generator'); ?>" />
+        </p>
     </form>
 	</div>
 

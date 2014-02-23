@@ -1,5 +1,5 @@
 <?php
-// LAncement automatique de la fonction de mise à jour en cas de publication si l'option est validée
+// Lancement automatique de la fonction de mise à jour en cas de publication si l'option est validée
 if(get_option("wp_excerpt_generator_maj") == true) {
 	// Mise à jour des données par défaut
 	function WP_Excerpt_Generator_update_auto($post_id) {
@@ -35,7 +35,7 @@ if(get_option("wp_excerpt_generator_maj") == true) {
 			$break = array(false, '');
 		}
 	
-		// Vérifie que l'option "Fin de chaîne"
+		// Vérifie que l'option "Fin de chaîne" est activée ou non
 		if($wp_excerpt_generator_method == "owntag" && is_string($wp_excerpt_generator_owntag) && !empty($wp_excerpt_generator_owntag)) {
 			$owntag = get_option("wp_excerpt_generator_owntag");
 		} else {
@@ -95,7 +95,6 @@ if(get_option("wp_excerpt_generator_maj") == true) {
 				$formatText[] = Limit_OwnTag($content, $owntag, $htmlOK, $htmlBR, $break);
 			}
 		}
-		echo $post_id;
 		
 		// On combine les ID avec leur valeur et on boucle pour faire l'update
 		$arrayContent = array_combine($ID, $formatText);
@@ -105,7 +104,6 @@ if(get_option("wp_excerpt_generator_maj") == true) {
 			}
 		} else {
 			foreach($arrayContent as $key => $value) {
-				$where = '';
 				$wp_excerpt_generator_update = $wpdb->update($table_WP_Excerpt_Generator, array('post_excerpt' => $value), array('ID' => $post_id));
 			}
 		}
