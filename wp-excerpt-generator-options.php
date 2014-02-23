@@ -134,7 +134,14 @@ function WP_Excerpt_Generator_update() {
 	}
 }
 
-// Mise à jour des données par défaut
+// Fonction de gestion du générateur automatique d'extraits...
+function WP_Excerpt_Generator_update_maj_auto() {
+	global $wpdb, $table_WP_Excerpt_Generator; // insérer les variables globales
+	$wp_excerpt_generator_maj		= $_POST['wp_excerpt_generator_maj'];
+	update_option("wp_excerpt_generator_maj", $wp_excerpt_generator_maj);
+}
+
+// Suppression complète des données
 function WP_Excerpt_Generator_delete() {
 	global $wpdb, $table_WP_Excerpt_Generator; // insérer les variables globales
 
@@ -147,6 +154,28 @@ function WP_Excerpt_Generator_delete() {
 	}
 }
 
+// Suppression des extraits sélectionnés
+function WP_Excerpt_Generator_deleteSelectedExcerpt() {
+	global $wpdb, $table_WP_Excerpt_Generator; // insérer les variables globales
+
+	// Réglages de base
+	$wp_excerpt_generator_deleteSelectedExcerpt = $_POST['wp_excerpt_generator_deleteSelectedExcerpt'];
+	
+	if(!in_array('aucun',$wp_excerpt_generator_deleteSelectedExcerpt)) {
+		$deleteContent = "UPDATE $table_WP_Excerpt_Generator SET post_excerpt = '' WHERE ";
+		$countExcerpt = count($wp_excerpt_generator_deleteSelectedExcerpt);
+		$nb = 0;
+		foreach($wp_excerpt_generator_deleteSelectedExcerpt as $IDExcerpt) {
+			$deleteContent .= "ID = ".$IDExcerpt."";
+			if($nb < $countExcerpt-1) {
+				$deleteContent .= " OR ";
+			}
+			$nb++;
+		}
+		$deleteSelectedContent = $wpdb->get_results($deleteContent);
+	}
+}
+
 // Fonction d'affichage de la page de réglages de l'extension
 function WP_Excerpt_Generator_Callback() {
 	global $wpdb, $table_WP_Excerpt_Generator; // insérer les variables globales
@@ -156,9 +185,19 @@ function WP_Excerpt_Generator_Callback() {
 		WP_Excerpt_Generator_update();
 	}
 	
+	// Déclencher la fonction de mise à jour automatique des extraits (upload)
+	if(isset($_POST['wp_excerpt_generator_action_maj_auto']) && $_POST['wp_excerpt_generator_action_maj_auto'] == __('Enregistrer' , 'WP-Excerpt-Generator')) {
+		WP_Excerpt_Generator_update_maj_auto();
+	}
+	
 	// Déclencher la fonction de suppression des extraits
 	if(isset($_POST['wp_excerpt_generator_delete']) && $_POST['wp_excerpt_generator_delete'] == __('Supprimer' , 'WP-Excerpt-Generator')) {
 		WP_Excerpt_Generator_delete();
+	}
+	
+	// Déclencher la fonction de suppression des extraits sélectionnés uniquement
+	if(isset($_POST['wp_excerpt_generator_deleteSelectedExcerpt_choice']) && $_POST['wp_excerpt_generator_deleteSelectedExcerpt_choice'] == __('Supprimer ces extraits' , 'WP-Excerpt-Generator')) {
+		WP_Excerpt_Generator_deleteSelectedExcerpt();
 	}
 
 	/* --------------------------------------------------------------------- */
@@ -177,14 +216,16 @@ function WP_Excerpt_Generator_Callback() {
 	echo '<li>'; _e('Choisir le type de contenus ciblés (pages, articles ou les deux)','WP-Excerpt-Generator'); echo '</li>';
 	echo '<li>'; _e('Choisir la méthode de création (premier paragraphe, nombre de mots, nombre de lettres...)','WP-Excerpt-Generator'); echo '</li>';
 	echo '<li>'; _e('Affiner l\'affichage final','WP-Excerpt-Generator'); echo '</li>';
-	echo '<li>'; _e('Conserver ou non le code HTML dans l\'extrait (déconseillé)','WP-Excerpt-Generator'); echo '</li>';
+	echo '<li>'; _e('Conserver ou non le code HTML dans l\'extrait','WP-Excerpt-Generator'); echo '</li>';
+	echo '<li>'; _e('Générer automatiquement des extraits selon les paramètres définis','WP-Excerpt-Generator'); echo '</li>';
+	echo '<li>'; _e('Nettoyer et supprimer les extraits existants (générés ou non)','WP-Excerpt-Generator'); echo '</li>';
 	echo '</ol>';
 	_e('<em>N.B. : cette extension n\'est pas parfaite mais elle aide à remplir les extraits manquants sans difficulté. N\'hésitez pas à contacter <a href="http://blog.internet-formation.fr" target="_blank">Mathieu Chartier</a>, le créateur du plugin, pour de plus amples informations.</em>' , 'WP-Excerpt-Generator'); 
 	echo '<br/>';
 	echo '</div>';
 	echo '</div>';
 ?>       
-<script language=javascript>
+<script type="text/javascript">
 function montrer(object) {
    if (document.getElementById) document.getElementById(object).style.display = 'block';
 }
@@ -196,7 +237,7 @@ function cacher(object) {
 
 <div class="block">
     <div class="col first-col">
-	<!-- Formulaire de mise à jour des données -->
+    <!-- Formulaire de mise à jour des données -->
     <form method="post" action="">
         <h4><?php _e('Paramétrage général','WP-Excerpt-Generator'); ?></h4>
         <p class="tr">
@@ -285,12 +326,24 @@ function cacher(object) {
             <label for="wp_excerpt_generator_break"><strong><?php _e('Chaîne de caractère affichée après l\'extrait','WP-Excerpt-Generator'); ?></strong></label>
             <br/><em><?php _e('Exemples : " (...)", " [...]", " ..."','WP-Excerpt-Generator'); ?></em>
         </p>
-
-    <p class="submit"><input type="submit" name="wp_excerpt_generator_action" class="button-primary" value="<?php _e('Enregistrer' , 'WP-Excerpt-Generator'); ?>" /></p>
+        
+    	<p class="submit"><input type="submit" name="wp_excerpt_generator_action" class="button-primary" value="<?php _e('Enregistrer' , 'WP-Excerpt-Generator'); ?>" /></p>
     </form>
 	</div>
 
 	<div class="col">
+	<form method="post" action="">
+    	<h4><?php _e('Mise à jour automatique des extraits ?','WP-Excerpt-Generator'); ?></h4>
+        <p class="tr">
+            <select name="wp_excerpt_generator_maj" id="wp_excerpt_generator_maj">
+                <option value="1" <?php if(get_option("wp_excerpt_generator_maj") == true) { echo 'selected="selected"'; } ?>><?php _e('Oui','WP-Excerpt-Generator'); ?></option>
+                <option value="0" <?php if(get_option("wp_excerpt_generator_maj") == false) { echo 'selected="selected"'; } ?>><?php _e('Non','WP-Excerpt-Generator'); ?></option>
+            </select>
+            <label for="wp_excerpt_generator_maj"><strong><?php _e('Générer automatiquement les nouveaux extraits ?','WP-Excerpt-Generator'); ?></strong></label>
+            <br/><em><?php _e('L\'option permet de générer automatiquement les extraits des contenus après leur publication ou leur modification.','WP-Excerpt-Generator'); ?></em>
+        </p>
+        <p class="submit"><input type="submit" name="wp_excerpt_generator_action_maj_auto" class="button-primary" value="<?php _e('Enregistrer' , 'WP-Excerpt-Generator'); ?>" /></p>
+    </form>
     <form method="post" action="">
         <h4><?php _e('Nettoyage des extraits...','WP-Excerpt-Generator'); ?></h4>
         <p class="tr">
@@ -300,7 +353,35 @@ function cacher(object) {
             </select>
             <label for="wp_excerpt_generator_deleteExcerpt"><strong><?php _e('Supprimer tous les extraits de la base ?','WP-Excerpt-Generator'); ?></strong></label>
         </p>   
-    <p class="submit"><input type="submit" name="wp_excerpt_generator_delete" onclick="javascript:return(confirm('<?php _e('Dernière chance avant la suppression complète des extraits...\nVous êtes toujours sûrs de vous ?','WP-Advanced-Search'); ?>'));" class="button-primary" value="<?php _e('Supprimer' , 'WP-Excerpt-Generator'); ?>" /></p>
+    	<p class="submit"><input type="submit" name="wp_excerpt_generator_delete" onclick="javascript:return(confirm('<?php _e('Dernière chance avant la suppression complète des extraits...\nVous êtes toujours sûrs de vous ?','WP-Advanced-Search'); ?>'));" class="button-primary" value="<?php _e('Supprimer' , 'WP-Excerpt-Generator'); ?>" /></p>
+    </form>
+    <form method="post" action="">
+		<p class="trNew">
+			<?php
+                $existingTitleExcerpt = $wpdb->get_results("SELECT post_title FROM $wpdb->posts WHERE post_status = 'publish' AND post_title !='' AND post_excerpt != ''"); // Lister les extraits existants
+				$existingIdExcerpt = $wpdb->get_results("SELECT ID FROM $wpdb->posts WHERE post_status = 'publish' AND post_title !='' AND post_excerpt != ''"); // Lister les extraits existants
+                foreach($existingTitleExcerpt as $excerpt) {
+					foreach($excerpt as $TitleExcerpt) {
+                        $tabTitleExcerpt[] = $TitleExcerpt;	
+                    }
+                }
+				foreach($existingIdExcerpt as $excerptId) {
+					foreach($excerptId as $IdExcerpt) {
+                        $tabIdExcerpt[] = $IdExcerpt;	
+                    }
+                }
+                $tabExcerpt = array_combine($tabIdExcerpt, $tabTitleExcerpt);
+            ?>
+            <label for="wp_excerpt_generator_deleteSelectedExcerpt"><strong><?php _e('Supprimer les extraits sélectionnés dans la base de données ?','WP-Excerpt-Generator'); ?></strong></label>
+            <select name="wp_excerpt_generator_deleteSelectedExcerpt[]" id="wp_excerpt_generator_deleteSelectedExcerpt" multiple="multiple" size="12" class="selectedExcerpt">
+                <option value="aucun"><?php _e('Aucun','WP-Advanced-Search'); ?></option>
+                <?php foreach($tabExcerpt as $ExcerptKey => $ExcerptTitle) { ?>
+                	<option value="<?php echo $ExcerptKey; ?>"><?php _e($ExcerptTitle,'WP-Advanced-Search'); ?></option>
+                <?php } ?>
+            </select>
+            <br/><em><?php _e('Seuls les contenus ayant des extraits remplis sont affichés dans la liste !','WP-Excerpt-Generator'); ?></em>
+        </p>  
+    	<p class="submit"><input type="submit" name="wp_excerpt_generator_deleteSelectedExcerpt_choice" onclick="javascript:return(confirm('<?php _e('Dernière chance avant la suppression des extraits sélectionnés...\n&Ecirc;tes-vous toujours sûrs de vous ?','WP-Advanced-Search'); ?>'));" class="button-primary" value="<?php _e('Supprimer ces extraits' , 'WP-Excerpt-Generator'); ?>" /></p>
     </form>
     </div>
     <div class="clear"></div>

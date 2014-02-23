@@ -7,9 +7,9 @@ Tags: extrait, extraits, extract, extracts, clip, clips, excerpt, excerpts, gene
 License: GPLv2 or later
 Requires at least: 3.1
 Tested up to: 3.6.1
-Stable Tag: 1.8
+Stable Tag: 2.0
 
-"WP Excerpt Generator" est un g&eacute;n&eacute;rateur d'extraits entièrement modulable. (plugin is a complete excerpt generator)
+"WP Excerpt Generator" est un g&eacute;n&eacute;rateur d'extraits entièrement modulable. (plugin is a complete and configurable excerpt generator)
 
 == Description ==
 
@@ -19,11 +19,13 @@ Stable Tag: 1.8
 Quelques exemples d'options existantes :
 <ul>
 <li>Choix du mode de g&eacute;n&eacute;ration des extraits</li>
+<li>Cr&eacute;ation automatique des extraits apr&egrave;s publication ou modification.</li>
 <li>Choix du type de contenus pour lesquels il faut g&eacute;n&eacute;rer des extraits (pages ou articles, ou les deux)</li>
 <li>Choix des publications pour lesquelles cr&eacute;er des extraits : contenus publi&eacute;s et/ou planifi&eacute;s</li>
 <li>Possibilit&eacute; de couper la fin de cha&icirc;ne proprement...</li>
 <li>Possibilit&eacute; de conserver les extraits d&eacute;j&agrave; existants dans la base de donn&eacute;es</li>
 <li>Nettoyage des balises HTML impropres ou non ferm&eacute;es</li>
+<li>Possibilit&eacute; de supprimer les extraits de notre choix</li>
 <li>...</li>
 </ul>
 </p>
@@ -34,11 +36,13 @@ Quelques exemples d'options existantes :
 Some examples of existing options:
 <ul>
 <li>Choice of generation excerpts</li>
+<li>Automatic creation of excerpts after publication or modification</li>
 <li>Choice of the type of content for which you must generate excerpts (pages or articles, or both)</li>
 <li>Selection of publications for which create extracts: published content and/or planned</li>
 <li>Ability to cut the end of the string properly ...</li>
 <li>Ability to keep existing excerpts in the database</li>
 <li>Cleaning HTML non closed tags</li>
+<li>Possibility of deleting the excerpts of our choice</li>
 <li>...</li>
 </ul>
 </p>
@@ -59,6 +63,7 @@ Some examples of existing options:
 
 1. "WP Excerpt Generator" dans l'admin de Wordpress (backOffice settings screenshot).
 2. Exemple de cr&eacute;ation d'extraits (example of creating excerpts).
+3. Nouvelles options de configuration (new admin panel with more options).
 
 == Changelog ==
 
@@ -91,3 +96,8 @@ Some examples of existing options:
 
 - Correction de la fonction de fermeture automatique des balises (fixed problem with the function "closetags")
 - Style ajout&eacute; dans le backoffice (backoffice stylesheet added)
+
+= Version 2.0 (23/02/2014) =
+
+- Ajout d'une option de cr&eacute;ation automatique des extraits en cas de publication ou de modification d'un contenu (Adding a content option automatic creation of excerpts to be published or modified)
+- Ajout d'une option de suppression avanc&eacute;e des extraits existants (Adding an advanced option to delete the existing excerpts)

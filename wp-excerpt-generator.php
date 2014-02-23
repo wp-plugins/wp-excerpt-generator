@@ -4,7 +4,7 @@ Plugin Name: WP Excerpt Generator
 Plugin URI: http://blog.internet-formation.fr/2013/10/wp-excerpt-generator/
 Description: générateur d'extraits pour WordPress avec plusieurs options... (<em>excerpts generator for WordPress with several options...</em>).
 Author: Mathieu Chartier
-Version: 1.8
+Version: 2.0
 Author URI: http://blog.internet-formation.fr
 */
 
@@ -13,7 +13,7 @@ global $wpdb, $table_WP_Excerpt_Generator, $WP_Excerpt_Generator_Version;
 $table_WP_Excerpt_Generator = $wpdb->posts;
 
 // Version du plugin
-$WP_Excerpt_Generator_Version = "1.8";
+$WP_Excerpt_Generator_Version = "2.0";
 
 // Gestion des langues
 function WP_Excerpt_Generator_Lang() {
@@ -31,6 +31,7 @@ function WP_Excerpt_Generator_install() {
 	
 	// Valeurs par défaut
 	add_option("wp_excerpt_generator_save", true);
+	add_option("wp_excerpt_generator_maj", true);
 	add_option("wp_excerpt_generator_type", 'pagepost');
 	add_option("wp_excerpt_generator_status", 'publish');
 	add_option("wp_excerpt_generator_method", 'paragraph');
@@ -52,6 +53,7 @@ function WP_Excerpt_Generator_desinstall() {
 	global $wpdb, $table_WP_Excerpt_Generator, $WP_Excerpt_Generator_Version;
 
 	delete_option("wp_excerpt_generator_save");
+	delete_option("wp_excerpt_generator_maj");
 	delete_option("wp_excerpt_generator_type");
 	delete_option("wp_excerpt_generator_status");
 	delete_option("wp_excerpt_generator_method");
@@ -71,14 +73,8 @@ function WP_Excerpt_Generator_desinstall() {
 function WP_Excerpt_Generator_Upgrade() {
     global $WP_Excerpt_Generator_Version;
     if(get_site_option('wp_excerpt_generator_version') != $WP_Excerpt_Generator_Version) {
-		if(get_site_option('wp_excerpt_generator_htmlBR') == false) {
-			add_option("wp_excerpt_generator_htmlBR", true);
-		}
-		if(get_site_option('wp_excerpt_generator_status') == false) {
-			add_option("wp_excerpt_generator_status", 'publish');
-		}
-		if(get_site_option('wp_excerpt_generator_owntag') == false) {
-			add_option("wp_excerpt_generator_owntag", '');
+		if(get_site_option('wp_excerpt_generator_maj') == false) {
+			add_option("wp_excerpt_generator_maj", true);
 		}
         update_option("wp_excerpt_generator_version", $WP_Excerpt_Generator_Version);
     }
@@ -108,4 +104,5 @@ add_action('admin_print_styles', 'WP_Excerpt_Generator_Admin_CSS');
 // Inclusion des fonctions et options de réglages
 include('wp-excerpt-generator-functions.php');
 include('wp-excerpt-generator-options.php');
+include('wp-excerpt-generator-maj-auto.php');
 ?>
