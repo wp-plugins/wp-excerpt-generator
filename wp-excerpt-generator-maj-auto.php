@@ -2,9 +2,10 @@
 // Lancement automatique de la fonction de mise à jour en cas de publication si l'option est validée
 if(get_option("wp_excerpt_generator_maj") == true) {
 	// Mise à jour des données par défaut
-	function WP_Excerpt_Generator_update_auto($post_id) {
+	function WP_Excerpt_Generator_update_auto() {
 		global $wpdb, $table_WP_Excerpt_Generator; // insérer les variables globales
-		
+    	$editID = get_the_ID();
+
 		// Si la chaîne doit se terminer par une ponctuation logique
 		if(get_option("wp_excerpt_generator_cleaner") == true) {
 			$cleaner = true;
@@ -69,13 +70,13 @@ if(get_option("wp_excerpt_generator_maj") == true) {
 	
 		// Récupère le type de contenus pour créer l'extrait et sélectionne des données dans la base de données
 		if(get_option("wp_excerpt_generator_type") == 'page') {
-			$selectContent = $wpdb->get_results("SELECT ID, post_content FROM $table_WP_Excerpt_Generator WHERE ".$selectContent." AND post_type = 'page'");
+			$selectContent = $wpdb->get_results("SELECT ID, post_content FROM $table_WP_Excerpt_Generator WHERE ".$selectContent." AND post_type = 'page' AND ID = '".mysql_real_escape_string(htmlspecialchars($editID))."'");
 		} else if(get_option("wp_excerpt_generator_type") == 'post') {		
-			$selectContent = $wpdb->get_results("SELECT ID, post_content FROM $table_WP_Excerpt_Generator WHERE ".$selectContent." AND post_type = 'post'");
+			$selectContent = $wpdb->get_results("SELECT ID, post_content FROM $table_WP_Excerpt_Generator WHERE ".$selectContent." AND post_type = 'post' AND ID = '".mysql_real_escape_string(htmlspecialchars($editID))."'");
 		} else if(get_option("wp_excerpt_generator_type") == 'pagepost') {	
-			$selectContent = $wpdb->get_results("SELECT ID, post_content FROM $table_WP_Excerpt_Generator WHERE ".$selectContent." AND (post_type = 'page' OR post_type = 'post')");
+			$selectContent = $wpdb->get_results("SELECT ID, post_content FROM $table_WP_Excerpt_Generator WHERE ".$selectContent." AND (post_type = 'page' OR post_type = 'post') AND ID = '".mysql_real_escape_string(htmlspecialchars($editID))."'");
 		}
-	
+		
 		// Boucle de mise à jour des contenus
 		foreach($selectContent as $key => $content) {		
 			// On récupère les ID dans un tableau pour la mise à jour et les contenus à traiter
@@ -100,11 +101,11 @@ if(get_option("wp_excerpt_generator_maj") == true) {
 		$arrayContent = array_combine($ID, $formatText);
 		if(get_option("wp_excerpt_generator_save") == true) {
 			foreach($arrayContent as $key => $value) {
-				$wp_excerpt_generator_update = $wpdb->query("UPDATE $table_WP_Excerpt_Generator SET post_excerpt = '".mysql_real_escape_string($value)."' WHERE ID = '".mysql_real_escape_string(htmlspecialchars($post_id))."' AND (post_excerpt IS NULL OR post_excerpt = '')");
+				$wp_excerpt_generator_update = $wpdb->query("UPDATE $table_WP_Excerpt_Generator SET post_excerpt = '".mysql_real_escape_string($value)."' WHERE ID = '".mysql_real_escape_string(htmlspecialchars($editID))."' AND (post_excerpt IS NULL OR post_excerpt = '')");
 			}
 		} else {
 			foreach($arrayContent as $key => $value) {
-				$wp_excerpt_generator_update = $wpdb->update($table_WP_Excerpt_Generator, array('post_excerpt' => $value), array('ID' => $post_id));
+				$wp_excerpt_generator_update = $wpdb->update($table_WP_Excerpt_Generator, array('post_excerpt' => $value), array('ID' => $editID));
 			}
 		}
 	}
