@@ -109,6 +109,6 @@ if(get_option("wp_excerpt_generator_maj") == true) {
 			}
 		}
 	}
-	add_action('save_post','WP_Excerpt_Generator_update_auto'); // save_post ou edit_post dans l'idéal comme action
+	add_action('publish_post','WP_Excerpt_Generator_update_auto'); // save_post ou edit_post dans l'idéal comme action
 }
 ?>
