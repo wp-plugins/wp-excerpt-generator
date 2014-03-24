@@ -381,7 +381,9 @@ function cacher(object) {
                         $tabIdExcerpt[] = $IdExcerpt;	
                     }
                 }
-                $tabExcerpt = array_combine($tabIdExcerpt, $tabTitleExcerpt);
+				if(!empty($tabTitleExcerpt) && !empty($tabIdExcerpt)) {
+	                $tabExcerpt = array_combine($tabIdExcerpt, $tabTitleExcerpt);
+				}
             ?>
             <label for="wp_excerpt_generator_deleteSelectedExcerpt"><strong><?php _e('Supprimer les extraits sélectionnés dans la base de données ?','WP-Excerpt-Generator'); ?></strong></label>
             <select name="wp_excerpt_generator_deleteSelectedExcerpt[]" id="wp_excerpt_generator_deleteSelectedExcerpt" multiple="multiple" size="12" class="selectedExcerpt">
