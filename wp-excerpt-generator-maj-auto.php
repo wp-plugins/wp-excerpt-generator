@@ -70,11 +70,11 @@ if(get_option("wp_excerpt_generator_maj") == true) {
 	
 		// Récupère le type de contenus pour créer l'extrait et sélectionne des données dans la base de données
 		if(get_option("wp_excerpt_generator_type") == 'page') {
-			$selectContent = $wpdb->get_results("SELECT ID, post_content FROM $table_WP_Excerpt_Generator WHERE ".$selectContent." AND post_type = 'page' AND ID = '".mysql_real_escape_string(htmlspecialchars($editID))."'");
+			$selectContent = $wpdb->get_results("SELECT ID, post_content FROM $table_WP_Excerpt_Generator WHERE ".$selectContent." AND post_type = 'page' AND ID = '".esc_sql(htmlspecialchars($editID))."'");
 		} else if(get_option("wp_excerpt_generator_type") == 'post') {		
-			$selectContent = $wpdb->get_results("SELECT ID, post_content FROM $table_WP_Excerpt_Generator WHERE ".$selectContent." AND post_type = 'post' AND ID = '".mysql_real_escape_string(htmlspecialchars($editID))."'");
+			$selectContent = $wpdb->get_results("SELECT ID, post_content FROM $table_WP_Excerpt_Generator WHERE ".$selectContent." AND post_type = 'post' AND ID = '".esc_sql(htmlspecialchars($editID))."'");
 		} else if(get_option("wp_excerpt_generator_type") == 'pagepost') {	
-			$selectContent = $wpdb->get_results("SELECT ID, post_content FROM $table_WP_Excerpt_Generator WHERE ".$selectContent." AND (post_type = 'page' OR post_type = 'post') AND ID = '".mysql_real_escape_string(htmlspecialchars($editID))."'");
+			$selectContent = $wpdb->get_results("SELECT ID, post_content FROM $table_WP_Excerpt_Generator WHERE ".$selectContent." AND (post_type = 'page' OR post_type = 'post') AND ID = '".esc_sql(htmlspecialchars($editID))."'");
 		}
 		
 		// Boucle de mise à jour des contenus
@@ -101,7 +101,7 @@ if(get_option("wp_excerpt_generator_maj") == true) {
 		$arrayContent = array_combine($ID, $formatText);
 		if(get_option("wp_excerpt_generator_save") == true) {
 			foreach($arrayContent as $key => $value) {
-				$wp_excerpt_generator_update = $wpdb->query("UPDATE $table_WP_Excerpt_Generator SET post_excerpt = '".mysql_real_escape_string($value)."' WHERE ID = '".mysql_real_escape_string(htmlspecialchars($editID))."' AND (post_excerpt IS NULL OR post_excerpt = '')");
+				$wp_excerpt_generator_update = $wpdb->query("UPDATE $table_WP_Excerpt_Generator SET post_excerpt = '".esc_sql($value)."' WHERE ID = '".esc_sql(htmlspecialchars($editID))."' AND (post_excerpt IS NULL OR post_excerpt = '')");
 			}
 		} else {
 			foreach($arrayContent as $key => $value) {
