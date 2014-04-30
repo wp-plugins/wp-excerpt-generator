@@ -4,7 +4,7 @@ Plugin Name: WP Excerpt Generator
 Plugin URI: http://blog.internet-formation.fr/2013/10/wp-excerpt-generator/
 Description: générateur d'extraits pour WordPress avec plusieurs options... (<em>excerpts generator for WordPress with several options...</em>).
 Author: Mathieu Chartier
-Version: 2.1
+Version: 2.1.1
 Author URI: http://blog.internet-formation.fr
 */
 
@@ -13,12 +13,12 @@ global $wpdb, $table_WP_Excerpt_Generator, $WP_Excerpt_Generator_Version;
 $table_WP_Excerpt_Generator = $wpdb->posts;
 
 // Version du plugin
-$WP_Excerpt_Generator_Version = "2.1";
+$WP_Excerpt_Generator_Version = "2.1.1";
 
 // Gestion des langues
 function WP_Excerpt_Generator_Lang() {
    $path = dirname(plugin_basename(__FILE__)).'/lang/';
-   load_plugin_textdomain('WP-Excerpt-Generator', NULL, $path);
+   load_plugin_textdomain('wp-excerpt-generator', NULL, $path);
 }
 add_action('plugins_loaded', 'WP_Excerpt_Generator_Lang');
 
