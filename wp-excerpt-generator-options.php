@@ -34,6 +34,13 @@ function WP_Excerpt_Generator_update() {
 // Fonction de génération manuelle des extraits
 function WP_Excerpt_Generator_generate() {
 	global $wpdb, $table_WP_Excerpt_Generator; // insérer les variables globales
+
+	// Variables utiles
+	$wp_excerpt_generator_method	= get_option("wp_excerpt_generator_method");
+	$wp_excerpt_generator_owntag	= get_option("wp_excerpt_generator_owntag");
+	$wp_excerpt_generator_nbletters	= get_option("wp_excerpt_generator_nbletters");
+	$wp_excerpt_generator_nbwords	= get_option("wp_excerpt_generator_nbwords");
+
 	// Si la chaîne doit se terminer par une ponctuation logique
 	if(get_option("wp_excerpt_generator_cleaner") == true) {
 		$cleaner = true;
@@ -66,21 +73,21 @@ function WP_Excerpt_Generator_generate() {
 
 	// Vérifie que l'option "Fin de chaîne"
 	if($wp_excerpt_generator_method == "owntag" && is_string($wp_excerpt_generator_owntag) && !empty($wp_excerpt_generator_owntag)) {
-		$owntag = get_option("wp_excerpt_generator_owntag");
+		$owntag = $wp_excerpt_generator_owntag;
 	} else {
 		$owntag = '';
 	}
 
 	// Vérifie que l'option "lettres" est activée et qu'un nombre de lettres a été donné...
 	if($wp_excerpt_generator_method == "letters" && is_numeric($wp_excerpt_generator_nbletters) && !empty($wp_excerpt_generator_nbletters)) {
-		$nbletters = get_option("wp_excerpt_generator_nbletters");
+		$nbletters = $wp_excerpt_generator_nbletters;
 	} else {
 		$nbletters = 600;
 	}
 	
 	// Vérifie que l'option "mots" est activée et qu'un nombre de mots a été donné...
 	if($wp_excerpt_generator_method == "words" && is_numeric($wp_excerpt_generator_nbwords) && !empty($wp_excerpt_generator_nbwords)) {
-		$nbwords = get_option("wp_excerpt_generator_nbwords");
+		$nbwords = $wp_excerpt_generator_nbwords;
 	} else {
 		$nbwords = 100;
 	}
@@ -110,7 +117,6 @@ function WP_Excerpt_Generator_generate() {
 		// On récupère les ID dans un tableau pour la mise à jour et les contenus à traiter
 		$ID[] = $content->ID;
 		$content = $content->post_content;
-			
 		// On adapte la fonction de formatage en fonction de la méthode utilisée
 		if(get_option("wp_excerpt_generator_method") == 'paragraph') {
 			$formatText[] = Limit_Paragraph($content, $htmlOK, $htmlBR, $break);
@@ -190,6 +196,7 @@ function WP_Excerpt_Generator_Callback() {
 	
 	// Déclencher la fonction de mise à jour (upload)
 	if(isset($_POST['wp_excerpt_generator_generate']) && $_POST['wp_excerpt_generator_generate'] == __('Générer les extraits' , 'wp-excerpt-generator')) {
+		WP_Excerpt_Generator_update();
 		WP_Excerpt_Generator_generate();
 	}
 	
@@ -228,6 +235,8 @@ function WP_Excerpt_Generator_Callback() {
 	echo '<li>'; _e('Générer automatiquement des extraits selon les paramètres définis','wp-excerpt-generator'); echo '</li>';
 	echo '<li>'; _e('Nettoyer et supprimer les extraits existants (générés ou non)','wp-excerpt-generator'); echo '</li>';
 	echo '</ol>';
+	_e('<em>Remarque : il peut exister quelques problèmes avec les découpages lorsque vous conservez le code HTML, notamment avec le découpage par lettres !</em>' , 'wp-excerpt-generator');
+	echo "<br/>";
 	_e('<em>N.B. : cette extension n\'est pas parfaite mais elle aide à remplir les extraits manquants sans difficulté. N\'hésitez pas à contacter <a href="http://blog.internet-formation.fr" target="_blank">Mathieu Chartier</a>, le créateur du plugin, pour de plus amples informations.</em>' , 'wp-excerpt-generator'); 
 	echo '<br/>';
 	echo '</div>';

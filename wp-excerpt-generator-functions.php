@@ -114,13 +114,23 @@ function Limit_Words($Text, $NbWords, $htmlOK = false, $htmlBR = true, $Cleaner 
 
 // Fonction de comptage des lettres
 function Limit_Letters($Text, $NbLetters, $htmlOK = false, $htmlBR = true, $Cleaner = true, $CharsMore = array(true, ' [...]')) {
+	// Nombre d'espaces (approximatif...) sur l'extrait découpé
+	$NbSpace = count(explode(" ", substr(strip_tags($Text), 0, $NbLetters)));
+	
+	// Nombre de caractères occupés par les balises HTML (à décompter !)
+	preg_match_all("#<([\/]?[a-zA-Z]+(.*)?[\/]?)>#iU",substr($Text, 0, $NbLetters+$NbSpace),$Result);
+	$listNbTag = implode("", $Result[1]);
+	// (1 * count($Result[1])) correspond au nombre de "<" et ">" manquants pour chaque balise détectée
+	$LenghtTags = strlen($listNbTag)+(2 * count($Result[1]));
+	
 	// On coupe les mots après tant de lettres (hors balises HTML !)
 	if(strlen(strip_tags($Text)) >= $NbLetters+1) {
-		$Text = substr($Text, 0, $NbLetters);
+		$Text = substr($Text, 0, $NbLetters+$LenghtTags);
 	}
 	
 	// On retire les balises HTML gênantes (optionnel)...
 	if($htmlOK == 'total') {
+		// On retient la taille du texte réel !
 		$NewText = $Text;		
 	} else if($htmlOK == 'partial') {
 		if($htmlBR == true) {
@@ -135,7 +145,7 @@ function Limit_Letters($Text, $NbLetters, $htmlOK = false, $htmlBR = true, $Clea
 			$Text = strip_tags($Text);
 		}
 	}
-	
+
 	if($Cleaner == true) {
 		if(strripos($NewText,". ")) {
 			$NewText = substr($NewText,0,strripos($NewText,". ")+1);
@@ -157,13 +167,15 @@ function Limit_Letters($Text, $NbLetters, $htmlOK = false, $htmlBR = true, $Clea
 			$NewText .= $CharsMore[1]."\n";
 		}
 	} else {
+		$NewText = $Text;
+		
 		// Ajoute des caractères de fin pour faire plus propre...
 		if($CharsMore[0] == true) {
 			$NewText .= $CharsMore[1]."\n";
 		}	
 	}
 	$NewText = closetags($NewText);
-	return $NewText; 
+	return $NewText;
 }
 
 // Fonction de récupération du premier paragraphe
