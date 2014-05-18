@@ -368,12 +368,12 @@ function cacher(object) {
         <h4><?php _e('Nettoyage des extraits...','wp-excerpt-generator'); ?></h4>
         <p class="tr">
             <select name="wp_excerpt_generator_deleteExcerpt" id="wp_excerpt_generator_deleteExcerpt">
-                <option value="1" onclick="javascript:return(confirm('<?php _e('Etes-vous sûrs de vouloir supprimer les extraits existants ?\nN.B. : aucun extrait ne sera conservé !','WP-Advanced-Search'); ?>'));"><?php _e('Oui','wp-excerpt-generator'); ?></option>
+                <option value="1" onclick="return(confirm('<?php _e('Etes-vous sûrs de vouloir supprimer les extraits existants ?\nN.B. : aucun extrait ne sera conservé !','wp-excerpt-generator'); ?>'));"><?php _e('Oui','wp-excerpt-generator'); ?></option>
                 <option value="0" <?php echo 'selected="selected"'; ?>><?php _e('Non','wp-excerpt-generator'); ?></option>
             </select>
             <label for="wp_excerpt_generator_deleteExcerpt"><strong><?php _e('Supprimer tous les extraits de la base ?','wp-excerpt-generator'); ?></strong></label>
         </p>   
-    	<p class="submit"><input type="submit" name="wp_excerpt_generator_delete" onclick="javascript:return(confirm('<?php _e('Dernière chance avant la suppression complète des extraits...\nVous êtes toujours sûrs de vous ?','WP-Advanced-Search'); ?>'));" class="button-primary" value="<?php _e('Supprimer' , 'wp-excerpt-generator'); ?>" /></p>
+    	<p class="submit"><input type="submit" name="wp_excerpt_generator_delete" onclick="javascript:return(confirm('<?php _e('Dernière chance avant la suppression complète des extraits...\nVous êtes toujours sûrs de vous ?','wp-excerpt-generator'); ?>'));" class="button-primary" value="<?php _e('Supprimer' , 'wp-excerpt-generator'); ?>" /></p>
     </form>
     <form method="post" action="">
 		<p class="trNew">
@@ -396,14 +396,14 @@ function cacher(object) {
             ?>
             <label for="wp_excerpt_generator_deleteSelectedExcerpt"><strong><?php _e('Supprimer les extraits sélectionnés dans la base de données ?','wp-excerpt-generator'); ?></strong></label>
             <select name="wp_excerpt_generator_deleteSelectedExcerpt[]" id="wp_excerpt_generator_deleteSelectedExcerpt" multiple="multiple" size="12" class="selectedExcerpt">
-                <option value="aucun"><?php _e('Aucun','WP-Advanced-Search'); ?></option>
+                <option value="aucun"><?php _e('Aucun','wp-excerpt-generator'); ?></option>
                 <?php foreach($tabExcerpt as $ExcerptKey => $ExcerptTitle) { ?>
-                	<option value="<?php echo $ExcerptKey; ?>"><?php _e($ExcerptTitle,'WP-Advanced-Search'); ?></option>
+                	<option value="<?php echo $ExcerptKey; ?>"><?php _e($ExcerptTitle,'wp-excerpt-generator'); ?></option>
                 <?php } ?>
             </select>
             <br/><em><?php _e('Seuls les contenus ayant des extraits remplis sont affichés dans la liste !','wp-excerpt-generator'); ?></em>
         </p>  
-    	<p class="submit"><input type="submit" name="wp_excerpt_generator_deleteSelectedExcerpt_choice" onclick="javascript:return(confirm('<?php _e('Dernière chance avant la suppression des extraits sélectionnés...\n&Ecirc;tes-vous toujours sûrs de vous ?','WP-Advanced-Search'); ?>'));" class="button-primary" value="<?php _e('Supprimer ces extraits' , 'wp-excerpt-generator'); ?>" /></p>
+    	<p class="submit"><input type="submit" name="wp_excerpt_generator_deleteSelectedExcerpt_choice" onclick="javascript:return(confirm('<?php _e('Dernière chance avant la suppression des extraits sélectionnés...\n&Ecirc;tes-vous toujours sûrs de vous ?','wp-excerpt-generator'); ?>'));" class="button-primary" value="<?php _e('Supprimer ces extraits' , 'wp-excerpt-generator'); ?>" /></p>
     </form>
     </div>
     <div class="clear"></div>

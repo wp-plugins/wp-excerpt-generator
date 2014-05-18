@@ -114,7 +114,7 @@ Some examples of existing options:
 
 - Deboguage du probl&egrave;me des traductions (fixed bug with translations)
 
-= Version 2.2 (18/05/2014) =
+= Version 2.2.1 (18/05/2014) =
 
 - Deboguage du probl&egrave;me avec certains d&eacute;coupages (fixed problems of cutting/clipping)
 - Am&eacute;lioration du d&eacute;coupage par lettres (improved cutting letters)
