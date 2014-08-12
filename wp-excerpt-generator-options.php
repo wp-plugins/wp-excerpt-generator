@@ -4,18 +4,19 @@ function WP_Excerpt_Generator_update() {
 	global $wpdb, $table_WP_Excerpt_Generator; // insérer les variables globales
 
 	// Réglages de base
-	$wp_excerpt_generator_save		= $_POST['wp_excerpt_generator_save'];
-	$wp_excerpt_generator_type		= $_POST['wp_excerpt_generator_type'];
-	$wp_excerpt_generator_status	= $_POST['wp_excerpt_generator_status'];
-	$wp_excerpt_generator_method	= $_POST['wp_excerpt_generator_method'];
-	$wp_excerpt_generator_owntag	= $_POST['wp_excerpt_generator_owntag'];
-	$wp_excerpt_generator_nbletters	= $_POST['wp_excerpt_generator_nbletters'];
-	$wp_excerpt_generator_nbwords	= $_POST['wp_excerpt_generator_nbwords'];
-	$wp_excerpt_generator_cleaner	= $_POST['wp_excerpt_generator_cleaner'];
-	$wp_excerpt_generator_breakOK	= $_POST['wp_excerpt_generator_breakOK'];
-	$wp_excerpt_generator_break		= $_POST['wp_excerpt_generator_break'];
-	$wp_excerpt_generator_htmlOK	= $_POST['wp_excerpt_generator_htmlOK'];
-	$wp_excerpt_generator_htmlBR	= $_POST['wp_excerpt_generator_htmlBR'];
+	$wp_excerpt_generator_save			= $_POST['wp_excerpt_generator_save'];
+	$wp_excerpt_generator_type			= $_POST['wp_excerpt_generator_type'];
+	$wp_excerpt_generator_status		= $_POST['wp_excerpt_generator_status'];
+	$wp_excerpt_generator_method		= $_POST['wp_excerpt_generator_method'];
+	$wp_excerpt_generator_owntag		= $_POST['wp_excerpt_generator_owntag'];
+	$wp_excerpt_generator_nbletters		= $_POST['wp_excerpt_generator_nbletters'];
+	$wp_excerpt_generator_nbwords		= $_POST['wp_excerpt_generator_nbwords'];
+	$wp_excerpt_generator_nbparagraphs	= $_POST['wp_excerpt_generator_nbparagraphs'];
+	$wp_excerpt_generator_cleaner		= $_POST['wp_excerpt_generator_cleaner'];
+	$wp_excerpt_generator_breakOK		= $_POST['wp_excerpt_generator_breakOK'];
+	$wp_excerpt_generator_break			= $_POST['wp_excerpt_generator_break'];
+	$wp_excerpt_generator_htmlOK		= $_POST['wp_excerpt_generator_htmlOK'];
+	$wp_excerpt_generator_htmlBR		= $_POST['wp_excerpt_generator_htmlBR'];
 
 	update_option("wp_excerpt_generator_save", $wp_excerpt_generator_save);
 	update_option("wp_excerpt_generator_type", $wp_excerpt_generator_type);
@@ -24,6 +25,7 @@ function WP_Excerpt_Generator_update() {
 	update_option("wp_excerpt_generator_owntag", $wp_excerpt_generator_owntag);
 	update_option("wp_excerpt_generator_nbletters", $wp_excerpt_generator_nbletters);
 	update_option("wp_excerpt_generator_nbwords", $wp_excerpt_generator_nbwords);
+	update_option("wp_excerpt_generator_nbparagraphs", $wp_excerpt_generator_nbparagraphs);
 	update_option("wp_excerpt_generator_cleaner", $wp_excerpt_generator_cleaner);
 	update_option("wp_excerpt_generator_breakOK", $wp_excerpt_generator_breakOK);
 	update_option("wp_excerpt_generator_break", $wp_excerpt_generator_break);
@@ -36,10 +38,11 @@ function WP_Excerpt_Generator_generate() {
 	global $wpdb, $table_WP_Excerpt_Generator; // insérer les variables globales
 
 	// Variables utiles
-	$wp_excerpt_generator_method	= get_option("wp_excerpt_generator_method");
-	$wp_excerpt_generator_owntag	= get_option("wp_excerpt_generator_owntag");
-	$wp_excerpt_generator_nbletters	= get_option("wp_excerpt_generator_nbletters");
-	$wp_excerpt_generator_nbwords	= get_option("wp_excerpt_generator_nbwords");
+	$wp_excerpt_generator_method		= get_option("wp_excerpt_generator_method");
+	$wp_excerpt_generator_owntag		= get_option("wp_excerpt_generator_owntag");
+	$wp_excerpt_generator_nbletters		= get_option("wp_excerpt_generator_nbletters");
+	$wp_excerpt_generator_nbwords		= get_option("wp_excerpt_generator_nbwords");
+	$wp_excerpt_generator_nbparagraphs	= get_option("wp_excerpt_generator_nbparagraphs");
 
 	// Si la chaîne doit se terminer par une ponctuation logique
 	if(get_option("wp_excerpt_generator_cleaner") == true) {
@@ -91,6 +94,13 @@ function WP_Excerpt_Generator_generate() {
 	} else {
 		$nbwords = 100;
 	}
+	
+	// Vérifie que l'option "paragraphes" est activée et qu'un nombre de paragraphes a été donné...
+	if($wp_excerpt_generator_method == "paragraph" && is_numeric($wp_excerpt_generator_nbparagraphs) && !empty($wp_excerpt_generator_nbparagraphs)) {
+		$nbparagraphs = $wp_excerpt_generator_nbparagraphs;
+	} else {
+		$nbparagraphs = 1;
+	}
 
 	// Récupère le statut des données dans la base de données
 	if(get_option("wp_excerpt_generator_status") == 'publish') {
@@ -119,7 +129,7 @@ function WP_Excerpt_Generator_generate() {
 		$content = $content->post_content;
 		// On adapte la fonction de formatage en fonction de la méthode utilisée
 		if(get_option("wp_excerpt_generator_method") == 'paragraph') {
-			$formatText[] = Limit_Paragraph($content, $htmlOK, $htmlBR, $break);
+			$formatText[] = Limit_Paragraph($content, $nbparagraphs, $htmlOK, $htmlBR, $break);
 		} else if(get_option("wp_excerpt_generator_method") == 'words') {
 			$formatText[] = Limit_Words($content, $nbwords, $htmlOK, $htmlBR, $cleaner, $break);
 		} else if(get_option("wp_excerpt_generator_method") == 'letters') {
@@ -283,11 +293,11 @@ function cacher(object) {
         </p>
         <p class="tr">
             <select name="wp_excerpt_generator_method" id="wp_excerpt_generator_method">
-                <option value="paragraph" onclick="cacher('blockWords'); cacher('blockLetters'); cacher('blockClean'); cacher('blockOwn');" <?php if(get_option("wp_excerpt_generator_method") == 'paragraph') { echo 'selected="selected"'; } ?>><?php _e('Premier paragraphe','wp-excerpt-generator'); ?></option>
-                <option value="words" onclick="montrer('blockWords'); montrer('blockClean'); cacher('blockLetters'); cacher('blockOwn');" <?php if(get_option("wp_excerpt_generator_method") == 'words') { echo 'selected="selected"'; } ?>><?php _e('Nombre de mots (à définir)','wp-excerpt-generator'); ?></option>
-                <option value="letters" onclick="montrer('blockLetters'); montrer('blockClean'); cacher('blockWords'); cacher('blockOwn');" <?php if(get_option("wp_excerpt_generator_method") == 'letters') { echo 'selected="selected"'; } ?>><?php _e('Nombre de lettres (à définir)','wp-excerpt-generator'); ?></option>
-                <option value="moretag" onclick="cacher('blockWords'); cacher('blockLetters'); cacher('blockClean'); cacher('blockOwn');" <?php if(get_option("wp_excerpt_generator_method") == 'moretag') { echo 'selected="selected"'; } ?>><?php _e('Avant la balise MORE de WordPress','wp-excerpt-generator'); ?></option>
-                <option value="owntag" onclick="montrer('blockOwn'); cacher('blockWords'); cacher('blockLetters'); montrer('blockClean');" <?php if(get_option("wp_excerpt_generator_method") == 'owntag') { echo 'selected="selected"'; } ?>><?php _e('Avant un délimiteur personnalisé ?','wp-excerpt-generator'); ?></option>
+                <option value="paragraph" onclick="montrer('blockParagraphs'); cacher('blockWords'); cacher('blockLetters'); cacher('blockClean'); cacher('blockOwn');" <?php if(get_option("wp_excerpt_generator_method") == 'paragraph') { echo 'selected="selected"'; } ?>><?php _e('Nombre de paragraphes (à définir)','wp-excerpt-generator'); ?></option>
+                <option value="words" onclick="montrer('blockWords'); montrer('blockClean'); cacher('blockLetters'); cacher('blockParagraphs'); cacher('blockOwn');" <?php if(get_option("wp_excerpt_generator_method") == 'words') { echo 'selected="selected"'; } ?>><?php _e('Nombre de mots (à définir)','wp-excerpt-generator'); ?></option>
+                <option value="letters" onclick="montrer('blockLetters'); montrer('blockClean'); cacher('blockParagraphs'); cacher('blockWords'); cacher('blockOwn');" <?php if(get_option("wp_excerpt_generator_method") == 'letters') { echo 'selected="selected"'; } ?>><?php _e('Nombre de lettres (à définir)','wp-excerpt-generator'); ?></option>
+                <option value="moretag" onclick="cacher('blockWords'); cacher('blockLetters'); cacher('blockParagraphs'); cacher('blockClean'); cacher('blockOwn');" <?php if(get_option("wp_excerpt_generator_method") == 'moretag') { echo 'selected="selected"'; } ?>><?php _e('Avant la balise MORE de WordPress','wp-excerpt-generator'); ?></option>
+                <option value="owntag" onclick="montrer('blockOwn'); cacher('blockWords'); cacher('blockLetters'); cacher('blockParagraphs'); montrer('blockClean');" <?php if(get_option("wp_excerpt_generator_method") == 'owntag') { echo 'selected="selected"'; } ?>><?php _e('Avant un délimiteur personnalisé ?','wp-excerpt-generator'); ?></option>
             </select>
             <label for="wp_excerpt_generator_method"><strong><?php _e('Méthode de création des extraits','wp-excerpt-generator'); ?></strong></label>
         </p>
@@ -298,11 +308,17 @@ function cacher(object) {
         </p>
         <p class="tr" id="blockWords" <?php if(get_option("wp_excerpt_generator_method") == 'words') { echo 'style="display:block;"'; } else { echo 'style="display:none;"'; } ?>>
             <input value="<?php echo get_option("wp_excerpt_generator_nbwords"); ?>" name="wp_excerpt_generator_nbwords" id="wp_excerpt_generator_nbwords" type="text" />
-            <label for="wp_excerpt_generator_nbwords"><strong><?php _e('Nombre de mots à conserver (maximum)','wp-excerpt-generator'); ?></strong></label>
+            <label for="wp_excerpt_generator_nbwords"><strong><?php _e('Nombre exact de mots à conserver','wp-excerpt-generator'); ?></strong></label>
         </p>
         <p class="tr" id="blockLetters" <?php if(get_option("wp_excerpt_generator_method") == 'letters') { echo 'style="display:block;"'; } else { echo 'style="display:none;"'; } ?>>
             <input value="<?php echo get_option("wp_excerpt_generator_nbletters"); ?>" name="wp_excerpt_generator_nbletters" id="wp_excerpt_generator_nbletters" type="text" />
             <label for="wp_excerpt_generator_nbletters"><strong><?php _e('Nombre de lettres à conserver (maximum)','wp-excerpt-generator'); ?></strong></label>
+            <br/><em><?php _e('Découpage pas toujours précis à cause des balises HTML existantes !','wp-excerpt-generator'); ?></em>
+        </p>
+        <p class="tr" id="blockParagraphs" <?php if(get_option("wp_excerpt_generator_method") == 'paragraph') { echo 'style="display:block;"'; } else { echo 'style="display:none;"'; } ?>>
+            <input value="<?php echo get_option("wp_excerpt_generator_nbparagraphs"); ?>" name="wp_excerpt_generator_nbparagraphs" id="wp_excerpt_generator_nbparagraphs" type="text" />
+            <label for="wp_excerpt_generator_nbparagraphs"><strong><?php _e('Nombre de paragraphes à conserver','wp-excerpt-generator'); ?></strong></label>
+            <br/><em><?php _e('Découpage pas toujours précis à cause des balises HTML existantes !','wp-excerpt-generator'); ?></em>
         </p>
 
         <p class="tr" id="blockClean" <?php if(get_option("wp_excerpt_generator_method") == 'letters' || get_option("wp_excerpt_generator_method") == 'words') { echo 'style="display:block;"'; } else { echo 'style="display:none;"'; } ?>>

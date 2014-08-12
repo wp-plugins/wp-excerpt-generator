@@ -46,6 +46,24 @@ function closetags($html) {
 
 // Fonction de comptage des mots
 function Limit_Words($Text, $NbWords, $htmlOK = false, $htmlBR = true, $Cleaner = true, $CharsMore = array(true, ' [...]')) {
+	// On découpe la chaîne pour repérer le dernier mot
+	if(preg_match_all('#([^[:space:]])+#i', $Text, $ChaineTab)) {
+		$TempText = "";
+		// On reconstitue la chaîne exacte pour récupérer la position du dernier mot
+		foreach($ChaineTab[0] as $key => $chaine) {
+			// On reconstitue la chaîne
+			if($key < $NbWords) {
+				$TempText .= $chaine." ";
+			}
+		}
+
+		// Extraction du dernier mot (pour toujours couper la phrase au bon endroit)
+		$lastWord = $ChaineTab[0][$NbWords-1];
+		
+		// On récupère la position exacte du dernier mot (au cas où il serait répété !)
+		$lastWordPosition = strripos($TempText, $lastWord);
+	}
+	
 	// On retire les balises HTML gênantes (optionnel)...
 	if($htmlOK == 'total') {
 		$Text = $Text;		
@@ -63,25 +81,17 @@ function Limit_Words($Text, $NbWords, $htmlOK = false, $htmlBR = true, $Cleaner 
 		}
 	}
 
-	// On coupe à chaque espace pour repérer les mots différents
-	//$ChaineTab = explode(" ", $Text);
-	
-	if(preg_match_all('#([^[:space:]])+#i', $Text, $ChaineTab)) {
-		foreach($ChaineTab[0] as $key => $chaine) {
-			// Nettoyage des chaînes de caractères
-			$specialchars = array('€', '$', '#', '+', '*', "'", '"', '²', '&', '~', '"', '{', '(', '[', '|', '`', '^', ')', '}', '=', '}', '^', '$', '£', '¤', '%', '*', 'µ', ',', '?', ';', ':', '/', '!', '§', '>', '<', '//');
-			// On supprime les chaines vides du tableau (donc les caractères exclus)
-			if(in_array($chaine, $specialchars)) {
-				$count += count(in_array($chaine, $specialchars),1);
-			}
-			
-			// On reconstitue la chaîne
-			if($key < $NbWords + $count) {
-				$NewText .=	$chaine." ";
-			}
+	// On trouve des solutions pour couper avant le dernier mot
+	$lenghtLastWord = strlen($lastWord);
+	if(preg_match('#(.*)'.$lastWord.'#iU', $Text)) {
+		if($lastWordPosition != stripos($Text,$lastWord)) {
+			$NewText = substr($Text,0,stripos($Text,$lastWord,$lastWordPosition)+$lenghtLastWord);
+		} else {
+			$NewText = substr($Text,0,stripos($Text,$lastWord)+$lenghtLastWord);
 		}
 	}
-
+	
+	// On découpe proprement la fin si l'option est activée sur "true"
 	if($Cleaner == true) {
 		if(strripos($NewText,". ")) {
 			$NewText = substr($NewText,0,strripos($NewText,". ")+1);
@@ -179,7 +189,7 @@ function Limit_Letters($Text, $NbLetters, $htmlOK = false, $htmlBR = true, $Clea
 }
 
 // Fonction de récupération du premier paragraphe
-function Limit_Paragraph($Text, $htmlOK = false, $htmlBR = true, $CharsMore = array(true, ' [...]')) {
+function Limit_Paragraph($Text, $limitParagraph = 1, $htmlOK = false, $htmlBR = true, $CharsMore = array(true, ' [...]')) {
 	// On retire les balises HTML gênantes (optionnel)...
 	if($htmlOK == 'total') {
 		$Text = $Text;		
@@ -199,14 +209,16 @@ function Limit_Paragraph($Text, $htmlOK = false, $htmlBR = true, $CharsMore = ar
 
 	// On trouve des solutions pour couper après le premier paragraphe
 	if(preg_match_all('#(.*)[^[:space:]]+#i', $Text, $ChaineTab)) {
+	//if(preg_match_all('#(.*)(</p>|\n)+#i', $Text, $ChaineTab)) {
+		$NewText = "";
 		foreach($ChaineTab[0] as $key => $chaine) {
-			if($key == 0) {
-				$NewText = $chaine;
-				// Ajoute des caractères de fin pour faire plus propre...
-				if($CharsMore[0] == true) {
-					$NewText .= $CharsMore[1]."\n";
-				}
-			}				
+			if($key < $limitParagraph) {
+				$NewText.= $chaine;
+			}
+		}
+		// Ajoute des caractères de fin pour faire plus propre...
+		if($CharsMore[0] == true) {
+			$NewText .= $CharsMore[1]."\n";
 		}
 	}
 	$NewText = closetags($NewText);
@@ -228,6 +240,7 @@ function Limit_More($Text, $htmlOK = 'none', $htmlBR = true, $CharsMore = array(
 		$Text = strip_tags($Text,"<br><br/><a><em><strong><cite><q><span><sup><sub><small><big><u><i><b><s><strike><ins><del>");
 		$Text = str_ireplace($replaceTags, $saveTags, $Text);
 	} else if($htmlOK == 'none') {
+		// On doit remplacer les commentaires par autre chose pour que la balise ne soit pas supprimée...
 		$saveTags = array('<!--more-->');
 		$replaceTags = array('!!!MORE!!!');
 		$Text = str_ireplace($saveTags, $replaceTags, $Text);
@@ -237,6 +250,7 @@ function Limit_More($Text, $htmlOK = 'none', $htmlBR = true, $CharsMore = array(
 		} else {
 			$Text = strip_tags($Text);
 		}
+		// On replace la balise MORE classique une fois le nettoyage HTML effectué
 		$Text = str_ireplace($replaceTags, $saveTags, $Text);
 	}
 
@@ -271,7 +285,7 @@ function Limit_OwnTag($Text, $owntag = '', $htmlOK = 'none', $htmlBR = true, $Ch
 		}
 	}
 
-	// On trouve des solutions pour couper avant la balise <!--more-->
+	// On trouve des solutions pour couper avant le mot choisi
 	$lenghtOwnTag = strlen($owntag);
 	if(preg_match('#(.*)'.$owntag.'#i', $Text)) {
 		$NewText = substr($Text,0,stripos($Text,$owntag)+$lenghtOwnTag);

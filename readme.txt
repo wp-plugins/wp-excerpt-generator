@@ -3,13 +3,13 @@ Contributors: Mathieu Chartier
 Donate link: http://www.mathieu-chartier.com
 Author URI: http://blog.internet-formation.fr/2013/07/wp-excerpt-generator/
 Plugin URI: http://wordpress.org/extend/plugins/wp-excerpt-generator/
-Tags: extrait, extraits, extract, extracts, clip, clips, excerpt, excerpts, generator, creator, g&eacute;n&eacute;rateur, generateur, cr&eacute;ateur, createur, generation, g&eacute;n&eacute;ration, kit, number of words, number of letters, wordpress, excerption, exctraction, extraire, abstract, abstracts, generative, generating, productive, make, making, faire, cr&eacute;er
+Tags: extrait, extraits, extract, extracts, clip, clips, excerpt, excerpts, generator, creator, g&eacute;n&eacute;rateur, generateur, cr&eacute;ateur, createur, generation, g&eacute;n&eacute;ration, kit, number of words, number of letters, wordpress, excerption, exctraction, extraire, abstract, abstracts, generative, generating, productive, make, making, faire, cr&eacute;er, paragraph, paragraphes, paragraphs, terms, termes, simulator, simulateur
 License: GPLv2 or later
 Requires at least: 3.1
-Tested up to: 3.9
-Stable Tag: 2.2
+Tested up to: 3.9.2
+Stable Tag: 2.3
 
-"WP Excerpt Generator" est un g&eacute;n&eacute;rateur d'extraits entièrement modulable. (plugin is a complete and configurable excerpt generator)
+"WP Excerpt Generator" est un g&eacute;n&eacute;rateur d'extraits entièrement modulable. (plugin is a complete and configurable generator of excerpts)
 
 == Description ==
 
@@ -67,13 +67,51 @@ Some examples of existing options:
 
 == Changelog ==
 
-= Version 1.0 (08/10/2013) =
+= Version 2.3 (12/08/2014) =
 
-- Premi&egrave;re version du g&eacute;n&eacute;rateur d'extraits (first version of the excerpt generator)
-- Possibilit&eacute; de choisir son mode de cr&eacute;ation (ability to choose the creation method)
-- Possibilit&eacute; de supprimer tous les extraits (ability to delete all excerpts of the database for cleaning)
-- Possibilit&eacute; de ne cr&eacute;er que les extraits manquants (ability to generate only the missing excerpts)
-- Ajout d'un syst&egrave;me de traduction (fran&ccedil;ais et anglais par d&eacute;faut) (French and English translation included)
+- Correction du mode de comptage des mots : tronquage exact maintenant (Fixed a problem with the method for cutting text by number of words : exact cutting now)
+- Possibilit&eacute; de couper par nombre de paragraphes (Ability to cut text by number of paragraphs)
+- Correction de certaines phrases et traductions (Fixed some sentences and translations)
+
+
+= Version 2.1.1 (30/04/2014) =
+
+- Deboguage du probl&egrave;me des traductions (fixed bug with translations)
+
+
+= Version 2.1 (17/04/2014) =
+
+- Compatible WordPress 3.9 et PHP 5.5 (fixed compatibility with WP 3.9 and PHP 5.5)
+
+
+= Version 2.0.4 (24/03/2014) =
+
+- Correction d'un petit bug (Fixed little bug)
+
+
+= Version 2.0 (23/02/2014) =
+
+- Ajout d'une option de cr&eacute;ation automatique des extraits en cas de publication ou de modification d'un contenu (Adding a content option automatic creation of excerpts to be published or modified)
+- Ajout d'une option de suppression avanc&eacute;e des extraits existants (Adding an advanced option to delete the existing excerpts)
+
+
+= Version 1.8 (18/11/2013) =
+
+- Correction de la fonction de fermeture automatique des balises (fixed problem with the function "closetags")
+- Style ajout&eacute; dans le backoffice (backoffice stylesheet added)
+
+
+= Version 1.7 (11/10/2013) =
+
+- Correction des update SQL pour plus de sécurité (fixed security problem with update SQL)
+
+
+= Version 1.6 (10/10/2013) =
+
+- Correction de petits bugs avec la fermeture des balises HTML (Fixed small bugs with the closing HTML tags)
+- Possibilit&eacute; de conserver les sauts de ligne (ou non) lorsque l'on conserve partiellement le code HTML (Ability to maintain line breaks (or not) when the HTML is partially preserved)
+- Possibilit&eacute; d'utiliser son propre d&eacute;limiteur pour couper les extraits apr&egrave;s un mot pr&eacute;cis, etc. (Ability to use its own delimiter to cut the clips after a specific word...)
+
 
 = Version 1.5 (09/10/2013) =
 
@@ -82,40 +120,11 @@ Some examples of existing options:
 - Probl&egrave;me r&eacute;solu pour les balises HTML non ferm&eacute;es lorsque l'on coupe la cha&icirc;ne au mauvais endroit (Problem solved for unclosed HTML tags when it is cut in the wrong place)
 - Quelques minuscules d&eacute;bogages (Some tiny bug fixes)
 
-= Version 1.6 (10/10/2013) =
 
-- Correction de petits bugs avec la fermeture des balises HTML (Fixed small bugs with the closing HTML tags)
-- Possibilit&eacute; de conserver les sauts de ligne (ou non) lorsque l'on conserve partiellement le code HTML (Ability to maintain line breaks (or not) when the HTML is partially preserved)
-- Possibilit&eacute; d'utiliser son propre d&eacute;limiteur pour couper les extraits apr&egrave;s un mot pr&eacute;cis, etc. (Ability to use its own delimiter to cut the clips after a specific word...)
+= Version 1.0 (08/10/2013) =
 
-= Version 1.7 (11/10/2013) =
-
-- Correction des update SQL pour plus de sécurité (fixed security problem with update SQL)
-
-= Version 1.8 (18/11/2013) =
-
-- Correction de la fonction de fermeture automatique des balises (fixed problem with the function "closetags")
-- Style ajout&eacute; dans le backoffice (backoffice stylesheet added)
-
-= Version 2.0 (23/02/2014) =
-
-- Ajout d'une option de cr&eacute;ation automatique des extraits en cas de publication ou de modification d'un contenu (Adding a content option automatic creation of excerpts to be published or modified)
-- Ajout d'une option de suppression avanc&eacute;e des extraits existants (Adding an advanced option to delete the existing excerpts)
-
-= Version 2.0.4 (24/03/2014) =
-
-- Correction d'un petit bug (Fixed little bug)
-
-= Version 2.1 (17/04/2014) =
-
-- Compatible WordPress 3.9 et PHP 5.5 (fixed compatibility with WP 3.9 and PHP 5.5)
-
-= Version 2.1.1 (30/04/2014) =
-
-- Deboguage du probl&egrave;me des traductions (fixed bug with translations)
-
-= Version 2.2.1 (18/05/2014) =
-
-- Deboguage du probl&egrave;me avec certains d&eacute;coupages (fixed problems of cutting/clipping)
-- Am&eacute;lioration du d&eacute;coupage par lettres (improved cutting letters)
-- Mise &agrave; jour des traductions anglophones (updated English and American translations)
+- Premi&egrave;re version du g&eacute;n&eacute;rateur d'extraits (first version of the excerpt generator)
+- Possibilit&eacute; de choisir son mode de cr&eacute;ation (ability to choose the creation method)
+- Possibilit&eacute; de supprimer tous les extraits (ability to delete all excerpts of the database for cleaning)
+- Possibilit&eacute; de ne cr&eacute;er que les extraits manquants (ability to generate only the missing excerpts)
+- Ajout d'un syst&egrave;me de traduction (fran&ccedil;ais et anglais par d&eacute;faut) (French and English translation included

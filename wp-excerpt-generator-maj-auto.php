@@ -56,7 +56,14 @@ if(get_option("wp_excerpt_generator_maj") == true) {
 		} else {
 			$nbwords = 100;
 		}
-	
+
+		// Vérifie que l'option "paragraphes" est activée et qu'un nombre de paragraphes a été donné...
+		if($wp_excerpt_generator_method == "paragraph" && is_numeric($wp_excerpt_generator_nbparagraphs) && !empty($wp_excerpt_generator_nbparagraphs)) {
+			$nbparagraphs = get_option("wp_excerpt_generator_nbparagraphs");
+		} else {
+			$nbparagraphs = 1;
+		}
+		
 		// Récupère le statut des données dans la base de données
 		if(get_option("wp_excerpt_generator_status") == 'publish') {
 			$selectContent = "post_status = 'publish'";
@@ -85,7 +92,7 @@ if(get_option("wp_excerpt_generator_maj") == true) {
 				
 			// On adapte la fonction de formatage en fonction de la méthode utilisée
 			if(get_option("wp_excerpt_generator_method") == 'paragraph') {
-				$formatText[] = Limit_Paragraph($content, $htmlOK, $htmlBR, $break);
+				$formatText[] = Limit_Paragraph($content, $nbparagraphs, $htmlOK, $htmlBR, $break);
 			} else if(get_option("wp_excerpt_generator_method") == 'words') {
 				$formatText[] = Limit_Words($content, $nbwords, $htmlOK, $htmlBR, $cleaner, $break);
 			} else if(get_option("wp_excerpt_generator_method") == 'letters') {
