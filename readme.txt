@@ -6,7 +6,7 @@ Plugin URI: http://wordpress.org/extend/plugins/wp-excerpt-generator/
 Tags: extrait, extraits, extract, extracts, clip, clips, excerpt, excerpts, generator, creator, g&eacute;n&eacute;rateur, generateur, cr&eacute;ateur, createur, generation, g&eacute;n&eacute;ration, kit, number of words, number of letters, wordpress, excerption, exctraction, extraire, abstract, abstracts, generative, generating, productive, make, making, faire, cr&eacute;er, paragraph, paragraphes, paragraphs, terms, termes, simulator, simulateur
 License: GPLv2 or later
 Requires at least: 3.1
-Tested up to: 3.9.2
+Tested up to: 4.0
 Stable Tag: 2.3
 
 "WP Excerpt Generator" est un g&eacute;n&eacute;rateur d'extraits entièrement modulable. (plugin is a complete and configurable generator of excerpts)
@@ -103,7 +103,7 @@ Some examples of existing options:
 
 = Version 1.7 (11/10/2013) =
 
-- Correction des update SQL pour plus de sécurité (fixed security problem with update SQL)
+- Correction des update SQL pour plus de s&eacute;curit&eacute; (fixed security problem with update SQL)
 
 
 = Version 1.6 (10/10/2013) =
