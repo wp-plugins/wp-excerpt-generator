@@ -108,7 +108,7 @@ if(get_option("wp_excerpt_generator_maj") == true) {
 		$arrayContent = array_combine($ID, $formatText);
 		if(get_option("wp_excerpt_generator_save") == true) {
 			foreach($arrayContent as $key => $value) {
-				$wp_excerpt_generator_update = $wpdb->query("UPDATE $table_WP_Excerpt_Generator SET post_excerpt = '".esc_sql($value)."' WHERE ID = '".esc_sql(htmlspecialchars($editID))."' AND (post_excerpt IS NULL OR post_excerpt = '')");
+				$wp_excerpt_generator_update = $wpdb->query("UPDATE $table_WP_Excerpt_Generator SET post_excerpt = '".esc_sql($value)."' WHERE ID = '".esc_sql($editID)."' AND (post_excerpt IS NULL OR post_excerpt = '')");
 			}
 		} else {
 			foreach($arrayContent as $key => $value) {

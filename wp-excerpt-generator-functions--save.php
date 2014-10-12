@@ -46,40 +46,45 @@ function closetags($html) {
 
 // Fonction de comptage des mots
 function Limit_Words($Text, $NbWords, $htmlOK = false, $htmlBR = true, $Cleaner = true, $CharsMore = array(true, ' [...]')) {
-	// On découpe la chaîne pour repérer le dernier mot (avec et sans balises HTML)
-		//preg_match_all('#([^[:space:]]+)#i', strip_tags($Text), $ChaineTab);
-	$ChaineTab[0] = mb_split("([[:space:]]|[\(\)\[\]\{\},;:!?<>])+", strip_tags(trim($Text)));
-	
-	// On reconstitue la chaîne exacte pour récupérer la position du dernier mot (sans HTML)
+	// On découpe la chaîne pour repérer le dernier mot --> Plusieurs méthodes variables !
+	preg_match_all('#[[:blank:]]?([^[:blank:]]+)[[:blank:]]#iU', strip_tags($Text), $ChaineTab);
+	print_r($ChaineTab[0]);
+		// Alternatives (plus ou moins bonnes...)
+		//$ChaineTab[0] = explode(' ', strip_tags($Text));
+		//$ChaineTab[0] = str_word_count(strip_tags($Text), 1);
+		//$ChaineTab[0] = mb_split("[[:blank:]]+", strip_tags(trim($Text)));
 	$TempText = "";
+	
+	// On reconstitue la chaîne exacte pour récupérer la position du dernier mot
 	foreach($ChaineTab[0] as $key => $chaine) {
+//echo $key.' : '.$chaine;
 		// On reconstitue la chaîne
 		if($key < $NbWords) {
 			$TempText .= $chaine." ";
 		}
 	}
+echo $TempText;
 
-	// Nombre total de mots
-	$numberWords = count($ChaineTab[0]);
-	
-	// Extraction des derniers mots (pour toujours couper la phrase au bon endroit)
-	$lastWord	= $ChaineTab[0][$NbWords-1];
-	$lastWord2	= $ChaineTab[0][$NbWords-2];
-	$lastWord3	= $ChaineTab[0][$NbWords-3];
-	$lastWord4	= $ChaineTab[0][$NbWords-4];
+	// Extraction du dernier mot (pour toujours couper la phrase au bon endroit)
+	$lastWord = $ChaineTab[0][$NbWords-1];
 
-	// On récupère la position exacte du dernier mot sans HTML (au cas où il serait répété !)
+	// On récupère la position exacte du dernier mot (au cas où il serait répété !)
 	$lastWordPosition = strripos($TempText, $lastWord);
+
+	// Ajoute une chaine reconnaissable après le dernier mot (jusqu'où il faut découper)
+	//$Text = preg_replace('#(.*){'.$lastWordPosition.',}('.$lastWord.')(.*)#iU', "$1[*****]$3", $Text);
+	//$Text = substr_replace($Text,"[*****]",0);
 	
-	// On retire les balises HTML gênantes (optionnel)...
- 	if($htmlOK == 'total') {
+	echo $lastWord." - ";
+	echo $lastWordPosition."<br/>";		
+ 	// On retire les balises HTML gênantes (optionnel)...
+	if($htmlOK == 'total') {
 		$Text = $Text;
 	} else if($htmlOK == 'partial') {
 		if($htmlBR == true) {
 			$Text = nl2br($Text);
 		}
-		$listTags = "<br><br/><a><em><strong><cite><q><span><sup><sub><small><big><u><i><b><s><strike><ins><del>";
-		$Text = strip_tags($Text,$listTags);
+		$Text = strip_tags($Text,"<br><br/><a><em><strong><cite><q><span><sup><sub><small><big><u><i><b><s><strike><ins><del>");
 	} else if($htmlOK == 'none') {
 		if($htmlBR == true) {
 			$Text = nl2br($Text);
@@ -88,20 +93,17 @@ function Limit_Words($Text, $NbWords, $htmlOK = false, $htmlBR = true, $Cleaner 
 			$Text = strip_tags($Text);
 		}
 	}
-	
+
 	// On trouve des solutions pour couper avant le dernier mot
 	$lenghtLastWord = strlen($lastWord);
-	if($NbWords < $numberWords && preg_match('#([\W\r\n\S]+)'.$lastWord2.'([\W\r\n\S]+)'.$lastWord.'#i', closetags($Text))) {
-		$regex = '#([\W\r\n\S]+)'.$lastWord4.'([\W\r\n\S]+)'.$lastWord3.'([\W\r\n\S]+)'.$lastWord2.'([\W\r\n\S]+)'.$lastWord.'#iU';
-		preg_match($regex, $Text, $FinalText);
-		$NewText = $FinalText[0];
-	} elseif($NbWords > $numberWords) {
-		$NewText = $Text; // Si le texte est plus court que le nombre de mots demandés !
-	} else {
-		echo "<h1>cas particulier</h1>";
-		$NewText = substr($Text,0,stripos($Text,$lastWord,$lastWordPosition)+$lenghtLastWord);
+	if(preg_match('#(.*)'.$lastWord.'#iU', $Text)) {
+		if($lastWordPosition != stripos($Text,$lastWord)) {
+			$NewText = substr($Text,0,stripos($Text,$lastWord,$lastWordPosition)+$lenghtLastWord);
+		} else {
+			$NewText = substr($Text,0,stripos($Text,$lastWord)+$lenghtLastWord);
+		}
 	}
-
+	
 	// On découpe proprement la fin si l'option est activée sur "true"
 	if($Cleaner == true) {
 		if(strripos($NewText,". ")) {
@@ -137,33 +139,35 @@ function Limit_Words($Text, $NbWords, $htmlOK = false, $htmlBR = true, $Cleaner 
 function Limit_Letters($Text, $NbLetters, $htmlOK = false, $htmlBR = true, $Cleaner = true, $CharsMore = array(true, ' [...]')) {
 	// Nombre d'espaces (approximatif...) sur l'extrait découpé
 	$NbSpace = count(explode(" ", substr(strip_tags($Text), 0, $NbLetters)));
-	
+
 	// Nombre de caractères occupés par les balises HTML (à décompter !)
 	preg_match_all("#<([\/]?[a-zA-Z]+(.*)?[\/]?)>#iU",substr($Text, 0, $NbLetters+$NbSpace),$Result);
 	$listNbTag = implode("", $Result[1]);
+	
 	// (1 * count($Result[1])) correspond au nombre de "<" et ">" manquants pour chaque balise détectée
 	$LenghtTags = strlen($listNbTag)+(2 * count($Result[1]));
 	
 	// On coupe les mots après tant de lettres (hors balises HTML !)
-	if(strlen(strip_tags($Text)) >= $NbLetters+1) {
+	if(strlen(strip_tags($Text)) >= ($NbLetters+1)) {
 		$Text = substr($Text, 0, $NbLetters+$LenghtTags);
 	}
-	
+
 	// On retire les balises HTML gênantes (optionnel)...
 	if($htmlOK == 'total') {
-		// On retient la taille du texte réel !
-		$NewText = $Text;		
-	} else if($htmlOK == 'partial') {
+		$NewText = $Text; // Le texte reste entier...
+	}
+	if($htmlOK == 'partial') {
 		if($htmlBR == true) {
 			$Text = nl2br($Text);
 		}
-		$Text = strip_tags($Text,"<br><br/><a><em><strong><cite><q><span><sup><sub><small><big><u><i><b><s><strike><ins><del>");
-	} else if($htmlOK == 'none') {
+		$NewText = strip_tags($Text,"<br><br/><a><em><strong><cite><q><span><sup><sub><small><big><u><i><b><s><strike><ins><del>");
+	}
+	if($htmlOK == 'none') {
 		if($htmlBR == true) {
 			$Text = nl2br($Text);
-			$Text = strip_tags($Text,"<br><br/>");
+			$NewText = strip_tags($Text,"<br><br/>");
 		} else {
-			$Text = strip_tags($Text);
+			$NewText = strip_tags($Text);
 		}
 	}
 
@@ -203,7 +207,7 @@ function Limit_Letters($Text, $NbLetters, $htmlOK = false, $htmlBR = true, $Clea
 function Limit_Paragraph($Text, $limitParagraph = 1, $htmlOK = false, $htmlBR = true, $CharsMore = array(true, ' [...]')) {
 	// On retire les balises HTML gênantes (optionnel)...
 	if($htmlOK == 'total') {
-		$Text = $Text;		
+		$Text = nl2br($Text);		
 	} else if($htmlOK == 'partial') {
 		if($htmlBR == true) {
 			$Text = nl2br($Text);
