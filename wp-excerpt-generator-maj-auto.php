@@ -99,7 +99,7 @@ if(get_option("wp_excerpt_generator_maj") == true) {
 			
 			// On adapte la fonction de formatage en fonction de la méthode utilisée
 			if(get_option("wp_excerpt_generator_method") == 'paragraph') {
-				$formatText[] = Limit_Paragraph($content, $htmlOK, $htmlBR, $break);
+				$formatText[] = Limit_Paragraph($content, $nbparagraphs, $htmlOK, $htmlBR, $break);
 			} else if(get_option("wp_excerpt_generator_method") == 'words') {
 				$formatText[] = Limit_Words($content, $nbwords, $htmlOK, $htmlBR, $cleaner, $break);
 			} else if(get_option("wp_excerpt_generator_method") == 'letters') {

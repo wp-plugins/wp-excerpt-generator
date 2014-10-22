@@ -7,7 +7,7 @@ Tags: extrait, extraits, extract, extracts, clip, clips, excerpt, excerpts, gene
 License: GPLv2 or later
 Requires at least: 3.1
 Tested up to: 4.0
-Stable Tag: 2.4.1
+Stable Tag: 2.4.2
 
 "WP Excerpt Generator" est un g&eacute;n&eacute;rateur d'extraits entièrement modulable. (plugin is a complete and configurable generator of excerpts)
 
@@ -67,7 +67,7 @@ Some examples of existing options:
 
 == Changelog ==
 
-= Version 2.4 (12/10/2014) =
+= Version 2.4.2 (22/10/2014) =
 
 - R&eacute;solution d'un souci de la mise &agrave; jour automatique (Fixed a problem with the automatic update)
 
