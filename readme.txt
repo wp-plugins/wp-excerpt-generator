@@ -69,7 +69,11 @@ Some examples of existing options:
 
 = Version 2.4 (12/10/2014) =
 
-- Am&eacutelioration du d&eacute;coupage par nombre de mots (Upgrade the cutting by number of words)
+- R&eacute;solution d'un souci de la mise &agrave; jour automatique (Fixed a problem with the automatic update)
+
+= Version 2.4 (12/10/2014) =
+
+- Am&eacute;lioration du d&eacute;coupage par nombre de mots (Upgrade the cutting by number of words)
 - Correction du d&eacute;coupage par nombre de lettres (Fixed a problem with the cutting by number of letters)
 - Correction du d&eacute;coupage par nombre de paragraphes (Fixed a problem with the cutting by number of paragraphs)
 
