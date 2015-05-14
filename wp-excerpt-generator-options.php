@@ -123,32 +123,34 @@ function WP_Excerpt_Generator_generate() {
 	}
 
 	// Boucle de mise à jour des contenus
-	foreach($selectContent as $key => $content) {		
-		// On récupère les ID dans un tableau pour la mise à jour et les contenus à traiter
-		$ID[] = $content->ID;
-		$content = $content->post_content;
-		// On adapte la fonction de formatage en fonction de la méthode utilisée
-		if(get_option("wp_excerpt_generator_method") == 'paragraph') {
-			$formatText[] = Limit_Paragraph($content, $nbparagraphs, $htmlOK, $htmlBR, $break);
-		} else if(get_option("wp_excerpt_generator_method") == 'words') {
-			$formatText[] = Limit_Words($content, $nbwords, $htmlOK, $htmlBR, $cleaner, $break);
-		} else if(get_option("wp_excerpt_generator_method") == 'letters') {
-			$formatText[] = Limit_Letters($content, $nbletters, $htmlOK, $htmlBR, $cleaner, $break);
-		} else if(get_option("wp_excerpt_generator_method") == 'moretag') {
-			$formatText[] = Limit_More($content, $htmlOK, $htmlBR, $break);
-		} else if(get_option("wp_excerpt_generator_method") == 'owntag') {
-			$formatText[] = Limit_OwnTag($content, $owntag, $htmlOK, $htmlBR, $break);
+	if(!empty($selectContent)) {
+		foreach($selectContent as $key => $content) {		
+			// On récupère les ID dans un tableau pour la mise à jour et les contenus à traiter
+			$ID[] = $content->ID;
+			$content = $content->post_content;
+			// On adapte la fonction de formatage en fonction de la méthode utilisée
+			if(get_option("wp_excerpt_generator_method") == 'paragraph') {
+				$formatText[] = Limit_Paragraph($content, $nbparagraphs, $htmlOK, $htmlBR, $break);
+			} else if(get_option("wp_excerpt_generator_method") == 'words') {
+				$formatText[] = Limit_Words($content, $nbwords, $htmlOK, $htmlBR, $cleaner, $break);
+			} else if(get_option("wp_excerpt_generator_method") == 'letters') {
+				$formatText[] = Limit_Letters($content, $nbletters, $htmlOK, $htmlBR, $cleaner, $break);
+			} else if(get_option("wp_excerpt_generator_method") == 'moretag') {
+				$formatText[] = Limit_More($content, $htmlOK, $htmlBR, $break);
+			} else if(get_option("wp_excerpt_generator_method") == 'owntag') {
+				$formatText[] = Limit_OwnTag($content, $owntag, $htmlOK, $htmlBR, $break);
+			}
 		}
-	}
-	// On combine les ID avec leur valeur et on boucle pour faire l'update
-	$arrayContent = array_combine($ID, $formatText);
-	if(get_option("wp_excerpt_generator_save") == true) {
-		foreach($arrayContent as $key => $value) {
-			$wp_excerpt_generator_update = $wpdb->query("UPDATE $table_WP_Excerpt_Generator SET post_excerpt = '".esc_sql($value)."' WHERE ID = '".esc_sql(htmlspecialchars($key))."' AND (post_excerpt IS NULL OR post_excerpt = '')");
-		}
-	} else {
-		foreach($arrayContent as $key => $value) {
-			$wp_excerpt_generator_update = $wpdb->update($table_WP_Excerpt_Generator, array('post_excerpt' => $value), array('ID' => $key));
+		// On combine les ID avec leur valeur et on boucle pour faire l'update
+		$arrayContent = array_combine($ID, $formatText);
+		if(get_option("wp_excerpt_generator_save") == true) {
+			foreach($arrayContent as $key => $value) {
+				$wp_excerpt_generator_update = $wpdb->query("UPDATE $table_WP_Excerpt_Generator SET post_excerpt = '".esc_sql($value)."' WHERE ID = '".esc_sql(htmlspecialchars($key))."' AND (post_excerpt IS NULL OR post_excerpt = '')");
+			}
+		} else {
+			foreach($arrayContent as $key => $value) {
+				$wp_excerpt_generator_update = $wpdb->update($table_WP_Excerpt_Generator, array('post_excerpt' => $value), array('ID' => $key));
+			}
 		}
 	}
 }
