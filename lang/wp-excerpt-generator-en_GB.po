@@ -1,0 +1,1047 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: wp-excerpt-generator\n"
+"POT-Creation-Date: 2015-07-27 19:45+0200\n"
+"PO-Revision-Date: 2015-07-27 19:46+0200\n"
+"Last-Translator: Mathieu Chartier <mathieu.chartier@internet-formation.fr>\n"
+"Language-Team: Mathieu Chartier <mathieu.chartier@internet-formation.fr>\n"
+"Language: en_GB\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.3\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-Basepath: .\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-SearchPath-0: ..\n"
+"X-Poedit-SearchPath-1: .\n"
+
+#: ../wp-excerpt-generator-options.php:214
+#: ../wp-excerpt-generator-options.php:225
+#: ../wp-excerpt-generator-options.php:383
+#: ../wp-excerpt-generator-options.php:400
+msgid "Enregistrer"
+msgstr "Update"
+
+#: ../wp-excerpt-generator-options.php:219
+#: ../wp-excerpt-generator-options.php:384
+msgid "Générer les extraits"
+msgstr "Generate the excerpts"
+
+#: ../wp-excerpt-generator-options.php:230
+#: ../wp-excerpt-generator-options.php:411
+msgid "Supprimer"
+msgstr "Delete"
+
+#: ../wp-excerpt-generator-options.php:235
+#: ../wp-excerpt-generator-options.php:441
+msgid "Supprimer ces extraits"
+msgstr "Remove these excerpts"
+
+#: ../wp-excerpt-generator-options.php:245
+msgid "Réglages de WP Excerpt Generator"
+msgstr "WP Excerpt Generator Settings"
+
+#: ../wp-excerpt-generator-options.php:248
+msgid ""
+"<strong>WP Excerpt Generator</strong> est un générateur automatisé "
+"d'extraits pour WordPress."
+msgstr ""
+"<strong>WP Excerpt Generator</strong> is an automated extracts generator for "
+"WordPress."
+
+#: ../wp-excerpt-generator-options.php:249
+msgid ""
+"Plusieurs méthodes sont exploitables pour générer des extraits comme bon "
+"nous semble :"
+msgstr "Several methods can be exploited to generate excerpts as we want:"
+
+#: ../wp-excerpt-generator-options.php:251
+msgid "Conserver ou non les extraits déjà existants"
+msgstr "Keep or not the existing excerpts"
+
+#: ../wp-excerpt-generator-options.php:252
+msgid "Choisir le type de contenus ciblés (pages, articles ou les deux)"
+msgstr "Choose the type of targeted content (pages, items or both)"
+
+#: ../wp-excerpt-generator-options.php:253
+msgid ""
+"Choisir la méthode de création (premier paragraphe, nombre de mots, nombre "
+"de lettres...)"
+msgstr ""
+"Choose the method of creation (first paragraph, number of words, number of "
+"letters ...)"
+
+#: ../wp-excerpt-generator-options.php:254
+msgid "Affiner l'affichage final"
+msgstr "Refine the final display"
+
+#: ../wp-excerpt-generator-options.php:255
+msgid "Conserver ou non le code HTML dans l'extrait"
+msgstr "Keep or not the HTML code in the excerpt"
+
+#: ../wp-excerpt-generator-options.php:256
+msgid "Générer automatiquement des extraits selon les paramètres définis"
+msgstr "Automatically generate excerpts according to the current settings"
+
+#: ../wp-excerpt-generator-options.php:257
+msgid "Nettoyer et supprimer les extraits existants (générés ou non)"
+msgstr "Clean and remove existing extracts (generated or not)"
+
+#: ../wp-excerpt-generator-options.php:259
+msgid ""
+"<em>Remarque : il peut exister quelques problèmes avec les découpages "
+"lorsque vous conservez le code HTML, notamment avec le découpage par "
+"lettres !</em>"
+msgstr ""
+"<em>Note: there may be some problems with clipping when you keep the HTML "
+"code, especially with cutting letters.</em>"
+
+#: ../wp-excerpt-generator-options.php:261
+msgid ""
+"<em>N.B. : cette extension n'est pas parfaite mais elle aide à remplir les "
+"extraits manquants sans difficulté. N'hésitez pas à contacter <a href="
+"\"http://blog.internet-formation.fr\" target=\"_blank\">Mathieu Chartier</"
+"a>, le créateur du plugin, pour de plus amples informations.</em>"
+msgstr ""
+"<em>N.B. : This extension is not perfect but it helps to fill in the missing "
+"excerpt without difficulty. Contact <a href=\"http://blog.internet-formation."
+"fr\" target=\"_blank\">Mathieu Chartier</a>, the creator of the plugin, for "
+"more information.</ em>"
+
+#: ../wp-excerpt-generator-options.php:280
+msgid "Paramétrage général"
+msgstr "General Settings"
+
+#: ../wp-excerpt-generator-options.php:283
+msgid "Conserver"
+msgstr "Keep"
+
+#: ../wp-excerpt-generator-options.php:284
+msgid "Remplacer"
+msgstr "Replace"
+
+#: ../wp-excerpt-generator-options.php:286
+msgid "Conserver les extraits existants ou les remplacer ?"
+msgstr "Keep the existing excerpts or replace them?"
+
+#: ../wp-excerpt-generator-options.php:287
+msgid ""
+"L'option permet de créer les extraits manquants sans effacer les existants, "
+"ou de tout remplacer..."
+msgstr ""
+"The option to create missing excerpts without erasing the existing excerpts. "
+"Otherwise, everything is replaced by the new excerpts ..."
+
+#: ../wp-excerpt-generator-options.php:291
+msgid "Pages"
+msgstr "Pages"
+
+#: ../wp-excerpt-generator-options.php:292
+msgid "Articles"
+msgstr "Posts"
+
+#: ../wp-excerpt-generator-options.php:293
+msgid "Articles + Pages"
+msgstr "Posts + Pages"
+
+#: ../wp-excerpt-generator-options.php:295
+msgid "Générer les extraits pour quels contenus ?"
+msgstr "Generate excerpts for what content?"
+
+#: ../wp-excerpt-generator-options.php:299
+msgid "Contenus publiés"
+msgstr "published content"
+
+#: ../wp-excerpt-generator-options.php:300
+msgid "Contenus planifiés"
+msgstr "scheduled content"
+
+#: ../wp-excerpt-generator-options.php:301
+msgid "Les deux"
+msgstr "Both"
+
+#: ../wp-excerpt-generator-options.php:303
+msgid "Générer les extraits pour les contenus publiés ou planifiés ?"
+msgstr "Generate excerpts for content published or planned?"
+
+#: ../wp-excerpt-generator-options.php:307
+msgid "Nombre de paragraphes (à définir)"
+msgstr "Number of paragraphs (to be defined)"
+
+#: ../wp-excerpt-generator-options.php:308
+msgid "Nombre de mots (à définir)"
+msgstr "Number of words (to be defined)"
+
+#: ../wp-excerpt-generator-options.php:309
+msgid "Nombre de lettres (à définir)"
+msgstr "Number of letters (to be defined)"
+
+#: ../wp-excerpt-generator-options.php:310
+msgid "Avant la balise MORE de WordPress"
+msgstr "Before the MORE tag WordPress"
+
+#: ../wp-excerpt-generator-options.php:311
+msgid "Avant un délimiteur personnalisé ?"
+msgstr "Before a custom delimiter?"
+
+#: ../wp-excerpt-generator-options.php:313
+msgid "Méthode de création des extraits"
+msgstr "Creation method for the excerpts"
+
+#: ../wp-excerpt-generator-options.php:317
+msgid "Choisir le délimiteur (chaîne de caractère)"
+msgstr "Choice the delimiter (string)"
+
+#: ../wp-excerpt-generator-options.php:318
+msgid ""
+"L'option permet de couper le texte avant la chaîne choisi.<br/>Exemples : un "
+"mot, un tag inventé, etc."
+msgstr ""
+"The option to turn off the text before the selected string.<br/>Examples: a "
+"word invented a tag..."
+
+#: ../wp-excerpt-generator-options.php:322
+msgid "Nombre exact de mots à conserver"
+msgstr "Exact number of words to keep"
+
+#: ../wp-excerpt-generator-options.php:326
+msgid "Nombre de lettres à conserver (maximum)"
+msgstr "Number of letters to keep (maximum)"
+
+#: ../wp-excerpt-generator-options.php:327
+#: ../wp-excerpt-generator-options.php:332
+msgid "Découpage pas toujours précis à cause des balises HTML existantes !"
+msgstr "Cutting sometimes inaccurate because of existing HTML tags!"
+
+#: ../wp-excerpt-generator-options.php:331
+msgid "Nombre de paragraphes à conserver"
+msgstr "Number of paragraphs to keep (maximum)"
+
+#: ../wp-excerpt-generator-options.php:337
+#: ../wp-excerpt-generator-options.php:354
+#: ../wp-excerpt-generator-options.php:362
+#: ../wp-excerpt-generator-options.php:375
+#: ../wp-excerpt-generator-options.php:394
+#: ../wp-excerpt-generator-options.php:406
+msgid "Oui"
+msgstr "Yes"
+
+#: ../wp-excerpt-generator-options.php:338
+#: ../wp-excerpt-generator-options.php:355
+#: ../wp-excerpt-generator-options.php:363
+#: ../wp-excerpt-generator-options.php:376
+#: ../wp-excerpt-generator-options.php:395
+#: ../wp-excerpt-generator-options.php:407
+msgid "Non"
+msgstr "No"
+
+#: ../wp-excerpt-generator-options.php:340
+msgid "Terminer l'extrait par une ponctuation propre ? (conseillé)"
+msgstr "Finish excerpt with a clean punctuation? (recommended)"
+
+#: ../wp-excerpt-generator-options.php:341
+msgid ""
+"L'option permet de finir les phrases proprement par une ponctuation logique."
+msgstr ""
+"The option to end sentences withclean punctuation (\".\", \"?\", \"!\"...)."
+
+#: ../wp-excerpt-generator-options.php:345
+msgid "Totalement"
+msgstr "Keep all HTML code"
+
+#: ../wp-excerpt-generator-options.php:346
+msgid "Partiellement (gras, italique...)"
+msgstr "Partially (bold, italic ...)"
+
+#: ../wp-excerpt-generator-options.php:347
+msgid "Pas du tout"
+msgstr "No HTML"
+
+#: ../wp-excerpt-generator-options.php:349
+msgid "Conserver le code HTML ? (déconseillé)"
+msgstr "Keep the HTML code ? (not recommended)"
+
+#: ../wp-excerpt-generator-options.php:350
+msgid ""
+"Attention ! Si vous coupez par groupes de mots ou lettres, vous risquez de "
+"casser la logique du code HTML..."
+msgstr ""
+"Caution! If you cut through groups of words or letters, you may break the "
+"logic of HTML code ..."
+
+#: ../wp-excerpt-generator-options.php:357
+msgid "Conserver les sauts de lignes ?"
+msgstr "Keep line breaks?"
+
+#: ../wp-excerpt-generator-options.php:358
+#: ../wp-excerpt-generator-options.php:366
+msgid ""
+"L'option permet d'ajouter quelques caractères pour faire comprendre que le "
+"texte continu."
+msgstr "The option to add characters to understand that the continuous text."
+
+#: ../wp-excerpt-generator-options.php:365
+msgid "Ajouter une chaîne de fin à l'extrait ?"
+msgstr "Add a string to the end of the excerpt?"
+
+#: ../wp-excerpt-generator-options.php:370
+msgid "Chaîne de caractère affichée après l'extrait"
+msgstr "String displayed after the excerpt"
+
+#: ../wp-excerpt-generator-options.php:371
+msgid "Exemples : \" (...)\", \" [...]\", \" ...\""
+msgstr "For example : \" (...)\", \" [...]\", \" ...\""
+
+#: ../wp-excerpt-generator-options.php:378
+msgid "Supprimer les shortcodes des extraits ?"
+msgstr "Remove shortcodes in excerpts?"
+
+#: ../wp-excerpt-generator-options.php:379
+msgid ""
+"L'option supprime tout ce qui est de la forme [type-shortcode] dans les "
+"extraits (pour éviter qu'ils s'activent)."
+msgstr ""
+"This option removes all that is of the form [shortcode] in excerpts (to "
+"prevent them are active)."
+
+#: ../wp-excerpt-generator-options.php:391
+msgid "Mise à jour automatique des extraits ?"
+msgstr "Automatic update excerpts?"
+
+#: ../wp-excerpt-generator-options.php:397
+msgid "Générer automatiquement les nouveaux extraits ?"
+msgstr "Automatically generate new excerpts?"
+
+#: ../wp-excerpt-generator-options.php:398
+msgid ""
+"L'option permet de générer automatiquement les extraits des contenus après "
+"leur publication ou leur modification."
+msgstr ""
+"The option is used to automatically generate excerpts for posts or pages "
+"after their publication or modification."
+
+#: ../wp-excerpt-generator-options.php:403
+msgid "Nettoyage des extraits..."
+msgstr "Cleaning excerpts ..."
+
+#: ../wp-excerpt-generator-options.php:406
+msgid ""
+"Etes-vous sûrs de vouloir supprimer les extraits existants ?\\nN.B. : aucun "
+"extrait ne sera conservé !"
+msgstr ""
+"Are you sure you want to delete the existing excerpts?\\nNB: no extract will "
+"be retained!"
+
+#: ../wp-excerpt-generator-options.php:409
+msgid "Supprimer tous les extraits de la base ?"
+msgstr "Delete all excerpt from the database?"
+
+#: ../wp-excerpt-generator-options.php:411
+msgid ""
+"Dernière chance avant la suppression complète des extraits...\\nVous êtes "
+"toujours sûrs de vous ?"
+msgstr ""
+"Last chance before complete removal of extracts ...\\nAre you always safe "
+"with you?"
+
+#: ../wp-excerpt-generator-options.php:432
+msgid "Supprimer les extraits sélectionnés dans la base de données ?"
+msgstr "Delete all selected excerpts from the database?"
+
+#: ../wp-excerpt-generator-options.php:434
+msgid "Aucun"
+msgstr "None"
+
+#: ../wp-excerpt-generator-options.php:439
+msgid ""
+"Seuls les contenus ayant des extraits remplis sont affichés dans la liste !"
+msgstr ""
+"Only the contents of which are filled excerpts are displayed in the list!"
+
+#: ../wp-excerpt-generator-options.php:441
+msgid ""
+"Dernière chance avant la suppression des extraits sélectionnés...\\n&Ecirc;"
+"tes-vous toujours sûrs de vous ?"
+msgstr ""
+"Last chance before deleting the selected excerpts ...\\nAre you always safe "
+"with you?"
+
+#~ msgid "Premier paragraphe"
+#~ msgstr "First paragraph"
+
+#~ msgid "Publié le "
+#~ msgstr "Published"
+
+#~ msgid "par "
+#~ msgstr "by"
+
+#~ msgid "dans "
+#~ msgstr "in"
+
+#~ msgid "Lire la suite..."
+#~ msgstr "Read more ..."
+
+#~ msgid ""
+#~ "Index FULLTEXT créés avec succès !\\nVous pouvez utiliser le type "
+#~ "FULLTEXT dorénavant..."
+#~ msgstr ""
+#~ "FULLTEXT indexes created successfully!\\nYou can use the FULLTEXT type "
+#~ "now ..."
+
+#~ msgid "Aide et réglages de WP-Advanced-Search."
+#~ msgstr "WP-Advanced-Search settings."
+
+#~ msgid ""
+#~ "<strong>WP-Advanced-Search</strong> permet d'activer un moteur de "
+#~ "recherche puissant pour WordPress"
+#~ msgstr ""
+#~ "<strong>WP-Advanced-Search</strong> enables a powerful search engine for "
+#~ "WordPress"
+
+#~ msgid ""
+#~ "Plusieurs types de recherche (\"LIKE\", \"REGEXP\" ou \"FULLTEXT\"), "
+#~ "algorithme de pertinence, mise en surbrillance des mots recherchés, "
+#~ "pagination, affichage paramétrable..."
+#~ msgstr ""
+#~ "Several types of research (\"LIKE\", \"REGEXP\" or \"FULLTEXT\"), "
+#~ "relevancy algorithm, highlighting search terms, pagination, configurable "
+#~ "display ..."
+
+#~ msgid "Tout est entièrement modulable pour obtenir des résultats précis !"
+#~ msgstr "Everything is fully configurable for accurate results!"
+
+#~ msgid "Préparez le formulaire de recherche (search-form.php)"
+#~ msgstr "Prepare the search form (search-form.php)"
+
+#~ msgid "Préparez la page de résultats (search.php)"
+#~ msgstr "Prepare the results page (search.php)"
+
+#~ msgid "Paramétrez le moteur ci-dessous"
+#~ msgstr "Set the search engine below"
+
+#~ msgid ""
+#~ "Ajouter le code <strong>&lt;?php WP_Advanced_Search(); ?&gt;</strong> "
+#~ "pour afficher les résultats"
+#~ msgstr ""
+#~ "Add code <strong>&lt;?php WP_Advanced_Search (); ?&gt;</strong> to "
+#~ "display the results"
+
+#~ msgid "Paramètres de l'extension"
+#~ msgstr "Plugin settings"
+
+#~ msgid "Table de recherche"
+#~ msgstr "Search table"
+
+#~ msgid "Attribut \"name\" du champ de recherche"
+#~ msgstr "Attribute \"name\" field search"
+
+#~ msgid "Texte pour la requête recherchée"
+#~ msgstr "Text for the search query"
+
+#~ msgid "Texte affiché si aucun résultat"
+#~ msgstr "Display text when there is no result"
+
+#~ msgid "Options générales du moteur"
+#~ msgstr "General search engine options"
+
+#~ msgid "Colonnes de la table dans lesquelles rechercher"
+#~ msgstr "Table columns to search"
+
+#~ msgid "Séparez les valeurs par des virgules"
+#~ msgstr "Separate values with commas"
+
+#~ msgid "Ordre et options d'affichage"
+#~ msgstr "Display order"
+
+#~ msgid ""
+#~ "\">Installez les index FULLTEXT</a> pour que la recherche<br/>FULLTEXT "
+#~ "fonctionne bien..."
+#~ msgstr ""
+#~ "\">Install the FULLTEXT index</a> for research<br/>FULLTEXT works well ..."
+
+#~ msgid "Type de contenus pour la recherche ?"
+#~ msgstr "Content type for search ?"
+
+#~ msgid "Tout"
+#~ msgstr "All"
+
+#~ msgid "Recherche exacte ou approchante ?"
+#~ msgstr "Exact Search or approaching Search?"
+
+#~ msgid "Exacte"
+#~ msgstr "Exact"
+
+#~ msgid "Approchante"
+#~ msgstr "Approaching"
+
+#~ msgid "Options de formatage des requêtes"
+#~ msgstr "Formatting options for search queries"
+
+#~ msgid "Activer les \"stop words\" ?"
+#~ msgstr "Enable \"stop words\"?"
+
+#~ msgid "Utile si les contenus sont sans accent<br/>dans la base de données"
+#~ msgstr "Useful if the words are not emphasized<br/>in the database"
+
+#~ msgid "Exclure les mots courts ?"
+#~ msgstr "Exclude short words?"
+
+#~ msgid "Désactivé"
+#~ msgstr "Disabled"
+
+#~ msgid "< 1 caractère"
+#~ msgstr "< 1 character"
+
+#~ msgid "< 2 caractères"
+#~ msgstr "< 2 characters"
+
+#~ msgid "< 3 caractères"
+#~ msgstr "< 3 characters"
+
+#~ msgid "< 4 caractères"
+#~ msgstr "< 4 characters"
+
+#~ msgid "< 5 caractères"
+#~ msgstr "< 5 characters"
+
+#~ msgid "< 6 caractères"
+#~ msgstr "< 6 characters"
+
+#~ msgid "< 7 caractères"
+#~ msgstr "< 7 characters"
+
+#~ msgid "< 8 caractères"
+#~ msgstr "< 7 characters"
+
+#~ msgid "< 9 caractères"
+#~ msgstr "< 9 characters"
+
+#~ msgid "Options de rendu"
+#~ msgstr "Display Options"
+
+#~ msgid "Mise en surbrillance des mots clés"
+#~ msgstr "Highlight keywords search"
+
+#~ msgid "Précise"
+#~ msgstr "Precise"
+
+#~ msgid "Aucune mise en gras"
+#~ msgstr "No bolding"
+
+#~ msgid ""
+#~ "\"Précise\" pour la chaîne exacte, \"Approchante\" pour le mot contenant "
+#~ "une chaîne (si recherche LIKE)"
+#~ msgstr ""
+#~ "\"Precise\" for the exact string, \"approaching\" for the word containing "
+#~ "a string (if LIKE search)"
+
+#~ msgid "Numéroter les résultats ?"
+#~ msgstr "Number the search results?"
+
+#~ msgid "Nombre de résultats par page"
+#~ msgstr "Number of results per page"
+
+#~ msgid "0 ou vide pour tout afficher dans une page sans pagination"
+#~ msgstr "0 or blank to display all in one page without pagination"
+
+#~ msgid "Ordre des résultats"
+#~ msgstr "Order search results"
+
+#~ msgid "Ordonner les résultats ?"
+#~ msgstr "Sort results?"
+
+#~ msgid "Colonne de classement"
+#~ msgstr "Order Column"
+
+#~ msgid "Croissant ou décroissant ?"
+#~ msgstr "Ascending or descending?"
+
+#~ msgid "Croissant (ASC)"
+#~ msgstr "Ascending (ASC)"
+
+#~ msgid "Décroissant (DESC)"
+#~ msgstr "Descending (DESC)"
+
+#~ msgid "Algorithme de pertinence ?"
+#~ msgstr "relevance algorithm?"
+
+#~ msgid ""
+#~ "L'algorithme de pertinence affiche en ordre décroissant les résultats qui "
+#~ "ont le plus de correspondances avec la requête"
+#~ msgstr ""
+#~ "The relevancy algorithm displays the results in descending order with the "
+#~ "most connections with the request"
+
+#~ msgid "Blocs à afficher"
+#~ msgstr "Block to display"
+
+#~ msgid "Style CSS pour les blocs"
+#~ msgstr "Block stylesheet CSS"
+
+#~ msgid "Aucun style CSS"
+#~ msgstr "No CSS"
+
+#~ msgid "Feuille CSS Vide"
+#~ msgstr "Empty stylesheet CSS"
+
+#~ msgid "Bleu"
+#~ msgstr "Blue"
+
+#~ msgid "Rouge"
+#~ msgstr "Red"
+
+#~ msgid "Vert"
+#~ msgstr "Green"
+
+#~ msgid "Gris"
+#~ msgstr "Grey"
+
+#~ msgid "Noir"
+#~ msgstr "Black"
+
+#~ msgid "Blanc (discret)"
+#~ msgstr "White (sober)"
+
+#~ msgid "Affichage du titre ?"
+#~ msgstr "Display title?"
+
+#~ msgid "Affichage de la date ?"
+#~ msgstr "Display date?"
+
+#~ msgid "Formatage de la date (si active)"
+#~ msgstr "Date format (if enabled)"
+
+#~ msgid ""
+#~ "<a href=\"http://php.net/manual/fr/function.date.php\" target=\"_blank"
+#~ "\">Voir documentation PHP sur les dates</a></em><br/><em>(ex : \"l j F Y"
+#~ "\" pour \"mardi 25 juin 2013\")"
+#~ msgstr ""
+#~ "<a href=\"http://php.net/manual/fr/function.date.php\" target=\"_blank"
+#~ "\">See the documentation of PHP about dates</a></em><br/><em>(for "
+#~ "example: \"l, F j, Y\" to \"Tuesday, June 25, 2013\")"
+
+#~ msgid "Affichage du nom de l'auteur ?"
+#~ msgstr "Display author name?"
+
+#~ msgid "Affichage de la catégorie de l'article ?"
+#~ msgstr "Display category?"
+
+#~ msgid "Affichage du nombre de commentaires ?"
+#~ msgstr "Display number of comments?"
+
+#~ msgid "Affichage de l'article ou l'extrait ?"
+#~ msgstr "Show the article or the excerpt?"
+
+#~ msgid "Aucun des deux"
+#~ msgstr "Neither"
+
+#~ msgid "Extrait"
+#~ msgstr "The excerpt"
+
+#~ msgid "Extrait + \"Lire la suite...\""
+#~ msgstr "Excerpt + \"Read more...\""
+
+#~ msgid "Article complet"
+#~ msgstr "The article"
+
+#~ msgid "Affichage de l'image à la Une ?"
+#~ msgstr "Display post thumbnails?"
+
+#~ msgid "Options pour la pagination"
+#~ msgstr "Options for pagination"
+
+#~ msgid "Activer la pagination"
+#~ msgstr "Enabled pagination"
+
+#~ msgid "Style CSS pour la pagination"
+#~ msgstr "Pagination stylesheet CSS"
+
+#~ msgid "Blanc"
+#~ msgstr "White"
+
+#~ msgid "Affichage de \"première page\" et \"dernière page\" ?"
+#~ msgstr "Display \"first page\" and \"last page\"?"
+
+#~ msgid "Affichage de \"précédent\" et \"suivant\" ?"
+#~ msgstr "Display \"previous\" and \"next\"?"
+
+#~ msgid "Texte pour \"première page\""
+#~ msgstr "Text for \"first page\""
+
+#~ msgid "Texte pour \"dernière page\""
+#~ msgstr "Text for \"last page\""
+
+#~ msgid "Texte pour \"précédent\""
+#~ msgstr "Text for \"previous\""
+
+#~ msgid "Texte pour \"suivant\""
+#~ msgstr "Text for \"next\""
+
+#~ msgid "Aucun résultat, veuillez effectuer une autre recherche !"
+#~ msgstr "No results, please try another search!"
+
+#~ msgid "Prochains événements"
+#~ msgstr "Next events"
+
+#~ msgid "WP-Planification-ReadMore"
+#~ msgstr "WP-Planification-ReadMore"
+
+#~ msgid "Aucun événement"
+#~ msgstr "No event"
+
+#~ msgid "Aucun événement pour le moment"
+#~ msgstr "No event now"
+
+#~ msgid ""
+#~ "<strong>WP-Planification</strong> est un plugin permettant d'afficher des "
+#~ "publications futures comme bon vous semble."
+#~ msgstr ""
+#~ "<strong>WP-Planification</strong> is a plugin for displaying scheduled "
+#~ "publications as you wish."
+
+#~ msgid ""
+#~ "Le fonctionnement est simple : il suffit de <strong>planifier une date de "
+#~ "publication à venir</strong> pour que la page ou l'article soit affiché "
+#~ "par le plugin (widget ou shortcode selon votre choix)."
+#~ msgstr ""
+#~ "Operation is simple: just <strong>schedule a release date coming</strong> "
+#~ "for the page or post is displayed by the plugin (widget or shortcode)."
+
+#~ msgid ""
+#~ "Ajoutez librement la date (ou non), le lien (ou non), un contenu (page ou "
+#~ "article) ou un extrait (ou non) ainsi qu'une image à la Une (ou non)..."
+#~ msgstr ""
+#~ "Add as you want the date (or not), the link (or not), the content (page "
+#~ "or article) or the excerpt (or not) or a post thumbnails (or not) ..."
+
+#~ msgid "Deux options d'utilisation :"
+#~ msgstr "Two options:"
+
+#~ msgid "<strong>Widget</strong> entièrement modulable"
+#~ msgstr "<strong>Widget</strong> fully configurable"
+
+#~ msgid ""
+#~ "<strong>Shortcode [planification]</strong> à ajouter dans les articles ou "
+#~ "pages"
+#~ msgstr "<strong>Shortcode [planification]</strong> to add in posts or pages"
+
+#~ msgid "Afficher le bloc de planification"
+#~ msgstr "Display the scheduled block"
+
+#~ msgid "Titre du bloc (shortcode)"
+#~ msgstr "Block title (for shortcode)"
+
+#~ msgid "Laisser vide pour masquer le titre..."
+#~ msgstr "Empty to hide the title."
+
+#~ msgid "Options d'affichage"
+#~ msgstr "Display options"
+
+#~ msgid "Ordre d'affichage des blocs"
+#~ msgstr "Display order"
+
+#~ msgid "Date-Titre seul"
+#~ msgstr "Only Date-Title"
+
+#~ msgid "Extrait-Article seul"
+#~ msgstr "Only Excerpt-Article"
+
+#~ msgid "Image seule"
+#~ msgstr "Only post thumbnails"
+
+#~ msgid "Date-Titre => Extrait-Article"
+#~ msgstr "Date-Title => Excerpt-Article"
+
+#~ msgid "Extrait-Article => Date-Titre"
+#~ msgstr "Excerpt-Article => Date-Title"
+
+#~ msgid "Date-Titre => Image"
+#~ msgstr "Date-Title => Image"
+
+#~ msgid "Image => Date-Titre"
+#~ msgstr "Image => Date-Title"
+
+#~ msgid "Image => Extrait-Article"
+#~ msgstr "Image => Excerpt-Article"
+
+#~ msgid "Date-Titre => Image => Extrait-Article"
+#~ msgstr "Date-Title => Image => Excerpt-Article"
+
+#~ msgid "Date-Titre => Extrait-Article => Image"
+#~ msgstr "Date-Title => Excerpt-Article => Image"
+
+#~ msgid "Extrait-Article => Date-Titre => Image"
+#~ msgstr "Excerpt-Article => Date-Title => Image"
+
+#~ msgid "Extrait-Article => Image => Date-Titre"
+#~ msgstr "Excerpt-Article => Image => Date-Title"
+
+#~ msgid "Image => Date-Titre => Extrait-Article"
+#~ msgstr "Image => Date-Title => Excerpt-Article"
+
+#~ msgid "Image => Extrait-Article => Date-Titre"
+#~ msgstr "Image => Excerpt-Article => Date-Title"
+
+#~ msgid "Ne rien afficher..."
+#~ msgstr "No display ..."
+
+#~ msgid "Date + Lien"
+#~ msgstr "Date + Link"
+
+#~ msgid "Lien + Date"
+#~ msgstr "Link + Date"
+
+#~ msgid "Date seule"
+#~ msgstr "Only date"
+
+#~ msgid "Lien seul"
+#~ msgstr "Only link or text"
+
+#~ msgid "Afficher un lien \"Lire la suite...\""
+#~ msgstr "Show a link \"Read more ...\""
+
+#~ msgid "Texte du \"Lire la suite...\" (si actif)"
+#~ msgstr "Text for the \"Read more ...\" (if enabled)"
+
+#~ msgid "Activer les images à la Une pour afficher la vignette"
+#~ msgstr "Enable post thumbnails to show the image"
+
+#~ msgid ""
+#~ "N.B. : add_theme_support('post-thumbnails'); dans functions.php pour "
+#~ "activer l'option"
+#~ msgstr ""
+#~ "NB: add_theme_support ('post-thumbnails') in functions.php to enable"
+
+#~ msgid "Mise en page HTML"
+#~ msgstr "HTML Layout"
+
+#~ msgid "Séparateur entre la date et le titre *"
+#~ msgstr "Separator between the date and the title *"
+
+#~ msgid "Séparateur pour l'article ou l'extrait *"
+#~ msgstr "Separator for the article or the excerpt *"
+
+#~ msgid "Séparateur pour l'image à la Une *"
+#~ msgstr "Separator for the post thumbnails *"
+
+#~ msgid "* Code HTML accepté"
+#~ msgstr "* HTML accepted"
+
+#~ msgid "Balises d'encadrement du conteneur général"
+#~ msgstr "Tags for the global block"
+
+#~ msgid "Balises d'encadrement du bloc \"Date + Titre\""
+#~ msgstr "Tags for the block \"Date + Title\""
+
+#~ msgid "Balises d'encadrement de la date"
+#~ msgstr "Tags for the dates:"
+
+#~ msgid "Balises d'encadrement du texte (lien)"
+#~ msgstr "Tags for the text or link"
+
+#~ msgid "Remplacer \"a\" pour rendre le lien inactif..."
+#~ msgstr "Replace \"a\" to make the link active ..."
+
+#~ msgid "Balises d'encadrement du contenu ou de l'extrait"
+#~ msgstr "Tags for the content or the excerpt"
+
+#~ msgid "Balises d'encadrement du \"Lire la suite...\""
+#~ msgstr "Tags for the text \"read more ...\""
+
+#~ msgid "Balises d'encadrement de l'image à la Une"
+#~ msgstr "Tags for the post thumbnails"
+
+#~ msgid "Faire un \"clear\" après le bloc ?"
+#~ msgstr "Add a \"clear\" after the block ?"
+
+#~ msgid "Autres options"
+#~ msgstr "Other options"
+
+#~ msgid "Nombre de publications affichées"
+#~ msgstr "Number of schedules publications"
+
+#~ msgid "post"
+#~ msgstr "post"
+
+#~ msgid "page"
+#~ msgstr "page"
+
+#~ msgid "Colonne cible"
+#~ msgstr "Target Column"
+
+#~ msgid "post_date"
+#~ msgstr "post_date"
+
+#~ msgid "post_date_gmt"
+#~ msgstr "post_date_gmt"
+
+#~ msgid "Colonne utilisée pour le classement"
+#~ msgstr "Order Column"
+
+#~ msgid "Ordre d'affichage"
+#~ msgstr "Display order"
+
+#~ msgid "Affichage si aucune publication future n'existe"
+#~ msgstr "Display if there is no scheduled publication"
+
+#~ msgid "Phrase affichée si aucune planification *"
+#~ msgstr "Text if there is no scheduled publication *"
+
+#~ msgid ""
+#~ "* Laisser les deux champs vides pour masquer le bloc quand aucune "
+#~ "planification n'existe"
+#~ msgstr ""
+#~ "* Leave both fields blank to hide the block when nothing is scheduled"
+
+#~ msgid "Choix des classes CSS"
+#~ msgstr "Choice of CSS classes"
+
+#~ msgid "Ajout de la feuille de style par défaut ?"
+#~ msgstr "Add stylesheet CSS by défault ?"
+
+#~ msgid "Aucune feuille"
+#~ msgstr "No CSS"
+
+#~ msgid "Feuille vide personnalisable (style-empty.css)"
+#~ msgstr "Empty CSS customizable (style-empty.css)"
+
+#~ msgid "Style sobre"
+#~ msgstr "Sober style"
+
+#~ msgid "Dominante en noir"
+#~ msgstr "Dominant color black"
+
+#~ msgid "Dominante en gris"
+#~ msgstr "Dominant color grey"
+
+#~ msgid "Dominante en bleu"
+#~ msgstr "Dominant color blue"
+
+#~ msgid "Dominante en rouge"
+#~ msgstr "Dominant color red"
+
+#~ msgid "Dominante en vert"
+#~ msgstr "Dominant color green"
+
+#~ msgid "Dominante en noir sans bordures"
+#~ msgstr "Dominant color black without border"
+
+#~ msgid "Dominante en gris sans bordures"
+#~ msgstr "Dominant color grey without border"
+
+#~ msgid "Dominante en bleu sans bordures"
+#~ msgstr "Dominant color blue without border"
+
+#~ msgid "Dominante en rouge sans bordures"
+#~ msgstr "Dominant color red without border"
+
+#~ msgid "Dominante en vert sans bordures"
+#~ msgstr "Dominant color green without border"
+
+#~ msgid "Classe du bloc global"
+#~ msgstr "Global block - Class CSS"
+
+#~ msgid "Classe du bloc \"date + lien...\""
+#~ msgstr "Block \"date + link\" - Class CSS"
+
+#~ msgid "Classe de la date"
+#~ msgstr "Dates - Class CSS"
+
+#~ msgid "Classe du lien (URL) ou du texte"
+#~ msgstr "Link or text - Class CSS"
+
+#~ msgid "Classe du bloc de contenu (extrait ou article)"
+#~ msgstr "Class content block (excerpt or article)"
+
+#~ msgid "Classe du bloc \"Lire la suite...\""
+#~ msgstr "Block \"date + link\" - Class CSS"
+
+#~ msgid "Classe de l'image à la Une"
+#~ msgstr "Class of the post thumbnails"
+
+#~ msgid "WP-Planification"
+#~ msgstr "WP-Planification"
+
+#~ msgid ""
+#~ "Afficher des publications et événements futurs (en cas de planification "
+#~ "d'articles ou de pages)"
+#~ msgstr ""
+#~ "Show publications and future events (for scheduled articles or pages)"
+
+#~ msgid "Consultez la page de réglages pour tout paramétrer en détail..."
+#~ msgstr "Check the settings page to set everything in detail ..."
+
+#~ msgid "Titre"
+#~ msgstr "Title"
+
+#~ msgid "1"
+#~ msgstr "1"
+
+#~ msgid "l j F Y"
+#~ msgstr "l j F Y"
+
+#~ msgid " : "
+#~ msgstr " : "
+
+#~ msgid "div"
+#~ msgstr "div"
+
+#~ msgid "p"
+#~ msgstr "p"
+
+#~ msgid "span"
+#~ msgstr "span"
+
+#~ msgid "ASC"
+#~ msgstr "ASC"
+
+#~ msgid "Style CSS défini ?"
+#~ msgstr "Default stylesheet ?"
+
+#~ msgid "Voir documentation PHP sur les dates"
+#~ msgstr "See the documentation of PHP about dates"
+
+#~ msgid "(ex : \"l j F Y\" pour \"mardi 25 juin 2013\")"
+#~ msgstr "(for example: \"l, F j, Y\" to \"Tuesday, June 25, 2013\")"
+
+#~ msgid "Séparateur"
+#~ msgstr "Separator"
+
+#~ msgid "Code HTML accepté"
+#~ msgstr "HTML accepted"
+
+#~ msgid "Balises d'encadrement du bloc"
+#~ msgstr "Tags for the global block:"
+
+#~ msgid "(div, section, aside...)"
+#~ msgstr "(div, section, aside...)"
+
+#~ msgid "Balises du bloc \"Date + Lien\""
+#~ msgstr "Tags for the block \"Date + Title\":"
+
+#~ msgid "Si aucun événément"
+#~ msgstr "If no event..."
+
+#~ msgid "Titre si aucun événement"
+#~ msgstr "Title if no event"
+
+#~ msgid "Phrase si aucun événement"
+#~ msgstr "Text if no event"
+
+#~ msgid "Options BDD"
+#~ msgstr "Database settings"
+
+#~ msgid "Ordre d\\affichage"
+#~ msgstr "Display order"
+
+#~ msgid "Balises d'encadrement de la date :"
+#~ msgstr "Tags for the dates:"
+
+#~ msgid ""
+#~ "Laisser vide pour tout afficher (ou au choix : post, page, attachment...)"
+#~ msgstr "Let blank to show all (or choice: post, page, attachment...)"
+
+#~ msgid "Colonne cible : "
+#~ msgstr "Target Column:"
