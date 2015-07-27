@@ -97,7 +97,13 @@ if(get_option("wp_excerpt_generator_maj") == true) {
 				// On récupère les ID dans un tableau pour la mise à jour et les contenus à traiter
 				$ID[] = $content->ID;
 				$content = $content->post_content;
-				
+
+				// On supprime les shortcodes si l'option est cochée
+				if(get_option("wp_excerpt_generator_delete_shortcode") == true) {
+					$regex = "#(\[[^\[\]]+\][ ]?)#i";
+					$content = preg_replace($regex, "", $content);
+				}
+
 				// On adapte la fonction de formatage en fonction de la méthode utilisée
 				if(get_option("wp_excerpt_generator_method") == 'paragraph') {
 					$formatText[] = Limit_Paragraph($content, $nbparagraphs, $htmlOK, $htmlBR, $break);

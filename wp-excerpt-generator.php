@@ -4,7 +4,7 @@ Plugin Name: WP Excerpt Generator
 Plugin URI: http://blog.internet-formation.fr/2013/10/wp-excerpt-generator/
 Description: générateur d'extraits pour WordPress avec plusieurs options... (<em>excerpts generator for WordPress with several options...</em>).
 Author: Mathieu Chartier
-Version: 2.4.3
+Version: 2.5
 Author URI: http://blog.internet-formation.fr
 */
 
@@ -13,7 +13,7 @@ global $wpdb, $table_WP_Excerpt_Generator, $WP_Excerpt_Generator_Version;
 $table_WP_Excerpt_Generator = $wpdb->posts;
 
 // Version du plugin
-$WP_Excerpt_Generator_Version = "2.4.3";
+$WP_Excerpt_Generator_Version = "2.5";
 
 // Gestion des langues
 function WP_Excerpt_Generator_Lang() {
@@ -44,6 +44,7 @@ function WP_Excerpt_Generator_install() {
 	add_option("wp_excerpt_generator_htmlOK", 'none');
 	add_option("wp_excerpt_generator_htmlBR", true);
 	add_option("wp_excerpt_generator_deleteExcerpt", false);
+	add_option("wp_excerpt_generator_delete_shortcode", false);
 
 	// Prise en compte de la version en cours
 	add_option("wp_excerpt_generator_version", $WP_Excerpt_Generator_Version);
@@ -67,6 +68,7 @@ function WP_Excerpt_Generator_desinstall() {
 	delete_option("wp_excerpt_generator_htmlOK");
 	delete_option("wp_excerpt_generator_htmlBR");
 	delete_option("wp_excerpt_generator_deleteExcerpt");
+	delete_option("wp_excerpt_generator_delete_shortcode");
 	
 	delete_option("wp_excerpt_generator_version", $WP_Excerpt_Generator_Version);
 }
@@ -80,6 +82,9 @@ function WP_Excerpt_Generator_Upgrade() {
 		}
 		if(get_site_option('wp_excerpt_generator_nbparagraphs') == false) {
 			add_option("wp_excerpt_generator_nbparagraphs", 1);
+		}
+		if(!get_site_option('wp_excerpt_generator_delete_shortcode')) {
+			add_option("wp_excerpt_generator_delete_shortcode", false);
 		}
         update_option("wp_excerpt_generator_version", $WP_Excerpt_Generator_Version);
     }

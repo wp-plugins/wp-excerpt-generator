@@ -4,19 +4,20 @@ function WP_Excerpt_Generator_update() {
 	global $wpdb, $table_WP_Excerpt_Generator; // insérer les variables globales
 
 	// Réglages de base
-	$wp_excerpt_generator_save			= $_POST['wp_excerpt_generator_save'];
-	$wp_excerpt_generator_type			= $_POST['wp_excerpt_generator_type'];
-	$wp_excerpt_generator_status		= $_POST['wp_excerpt_generator_status'];
-	$wp_excerpt_generator_method		= $_POST['wp_excerpt_generator_method'];
-	$wp_excerpt_generator_owntag		= $_POST['wp_excerpt_generator_owntag'];
-	$wp_excerpt_generator_nbletters		= $_POST['wp_excerpt_generator_nbletters'];
-	$wp_excerpt_generator_nbwords		= $_POST['wp_excerpt_generator_nbwords'];
-	$wp_excerpt_generator_nbparagraphs	= $_POST['wp_excerpt_generator_nbparagraphs'];
-	$wp_excerpt_generator_cleaner		= $_POST['wp_excerpt_generator_cleaner'];
-	$wp_excerpt_generator_breakOK		= $_POST['wp_excerpt_generator_breakOK'];
-	$wp_excerpt_generator_break			= $_POST['wp_excerpt_generator_break'];
-	$wp_excerpt_generator_htmlOK		= $_POST['wp_excerpt_generator_htmlOK'];
-	$wp_excerpt_generator_htmlBR		= $_POST['wp_excerpt_generator_htmlBR'];
+	$wp_excerpt_generator_save				= $_POST['wp_excerpt_generator_save'];
+	$wp_excerpt_generator_type				= $_POST['wp_excerpt_generator_type'];
+	$wp_excerpt_generator_status			= $_POST['wp_excerpt_generator_status'];
+	$wp_excerpt_generator_method			= $_POST['wp_excerpt_generator_method'];
+	$wp_excerpt_generator_owntag			= $_POST['wp_excerpt_generator_owntag'];
+	$wp_excerpt_generator_nbletters			= $_POST['wp_excerpt_generator_nbletters'];
+	$wp_excerpt_generator_nbwords			= $_POST['wp_excerpt_generator_nbwords'];
+	$wp_excerpt_generator_nbparagraphs		= $_POST['wp_excerpt_generator_nbparagraphs'];
+	$wp_excerpt_generator_cleaner			= $_POST['wp_excerpt_generator_cleaner'];
+	$wp_excerpt_generator_breakOK			= $_POST['wp_excerpt_generator_breakOK'];
+	$wp_excerpt_generator_break				= $_POST['wp_excerpt_generator_break'];
+	$wp_excerpt_generator_htmlOK			= $_POST['wp_excerpt_generator_htmlOK'];
+	$wp_excerpt_generator_htmlBR			= $_POST['wp_excerpt_generator_htmlBR'];
+	$wp_excerpt_generator_delete_shortcode	= $_POST['wp_excerpt_generator_delete_shortcode'];
 
 	update_option("wp_excerpt_generator_save", $wp_excerpt_generator_save);
 	update_option("wp_excerpt_generator_type", $wp_excerpt_generator_type);
@@ -31,6 +32,7 @@ function WP_Excerpt_Generator_update() {
 	update_option("wp_excerpt_generator_break", $wp_excerpt_generator_break);
 	update_option("wp_excerpt_generator_htmlOK", $wp_excerpt_generator_htmlOK);
 	update_option("wp_excerpt_generator_htmlBR", $wp_excerpt_generator_htmlBR);
+	update_option("wp_excerpt_generator_delete_shortcode", $wp_excerpt_generator_delete_shortcode);
 }
 
 // Fonction de génération manuelle des extraits
@@ -128,6 +130,13 @@ function WP_Excerpt_Generator_generate() {
 			// On récupère les ID dans un tableau pour la mise à jour et les contenus à traiter
 			$ID[] = $content->ID;
 			$content = $content->post_content;
+			
+			// On supprime les shortcodes si l'option est cochée
+			if(get_option("wp_excerpt_generator_delete_shortcode") == true) {
+				$regex = "#(\[[^\[\]]+\][ ]?)#i";
+				$content = preg_replace($regex, "", $content);
+			}
+			
 			// On adapte la fonction de formatage en fonction de la méthode utilisée
 			if(get_option("wp_excerpt_generator_method") == 'paragraph') {
 				$formatText[] = Limit_Paragraph($content, $nbparagraphs, $htmlOK, $htmlBR, $break);
@@ -360,6 +369,14 @@ function cacher(object) {
             <input value="<?php echo get_option("wp_excerpt_generator_break"); ?>" name="wp_excerpt_generator_break" id="wp_excerpt_generator_break" type="text" />
             <label for="wp_excerpt_generator_break"><strong><?php _e('Chaîne de caractère affichée après l\'extrait','wp-excerpt-generator'); ?></strong></label>
             <br/><em><?php _e('Exemples : " (...)", " [...]", " ..."','wp-excerpt-generator'); ?></em>
+        </p>
+        <p class="tr">
+            <select name="wp_excerpt_generator_delete_shortcode" id="wp_excerpt_generator_delete_shortcode">
+                <option value="1" <?php if(get_option("wp_excerpt_generator_delete_shortcode") == true) { echo 'selected="selected"'; } ?>><?php _e('Oui','wp-excerpt-generator'); ?></option>
+                <option value="0" <?php if(get_option("wp_excerpt_generator_delete_shortcode") == false) { echo 'selected="selected"'; } ?>><?php _e('Non','wp-excerpt-generator'); ?></option>
+            </select>
+            <label for="wp_excerpt_generator_delete_shortcode"><strong><?php _e('Supprimer les shortcodes des extraits ?','wp-excerpt-generator'); ?></strong></label>
+            <br/><em><?php _e('L\'option supprime tout ce qui est de la forme [type-shortcode] dans les extraits (pour éviter qu\'ils s\'activent).','wp-excerpt-generator'); ?></em>
         </p>
         
     	<p class="submit">

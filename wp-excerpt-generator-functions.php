@@ -98,7 +98,6 @@ function Limit_Words($Text, $NbWords, $htmlOK = false, $htmlBR = true, $Cleaner 
 	} elseif($NbWords > $numberWords) {
 		$NewText = $Text; // Si le texte est plus court que le nombre de mots demandés !
 	} else {
-		echo "<h1>cas particulier</h1>";
 		$NewText = substr($Text,0,stripos($Text,$lastWord,$lastWordPosition)+$lenghtLastWord);
 	}
 
